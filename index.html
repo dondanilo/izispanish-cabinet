@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#58CC02">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Греческий">
+  <title>Греческий для Грека</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ==================== AUTH LOADING ==================== -->
+  <div id="screen-auth-loading" class="screen active">
+    <div class="auth-loading-container">
+      <div class="auth-loading-flag">🇬🇷</div>
+      <div class="auth-loading-spinner"></div>
+      <div class="auth-loading-text">Загрузка...</div>
+    </div>
+  </div>
+
+  <!-- ==================== LOGIN ==================== -->
+  <div id="screen-login" class="screen">
+    <div class="login-container">
+      <div class="login-flag">🇬🇷</div>
+      <h1 class="app-title">Греческий для Грека</h1>
+      <p class="login-subtitle">Войди через Google — прогресс сохранится на всех устройствах</p>
+      <button class="btn-google-login" onclick="signInWithGoogle()">
+        <svg class="google-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="22" height="22"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.6 32.9 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.1 7.9 3l5.7-5.7C34.1 6.6 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.6 15.9 18.9 12 24 12c3.1 0 5.8 1.1 7.9 3l5.7-5.7C34.1 6.6 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.3 26.7 36 24 36c-5.2 0-9.5-3.1-11.3-7.6l-6.5 5C9.7 39.6 16.3 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.9 2.4-2.5 4.5-4.5 5.9l.1-.1 6.2 5.2C36.9 40.7 44 35 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg>
+        Войти через Google
+      </button>
+    </div>
+  </div>
+
+  <!-- ==================== PAYWALL ==================== -->
+  <!-- ==================== ONBOARDING ==================== -->
+  <div id="screen-onboarding" class="screen">
+    <div class="onboarding-container">
+      <div class="onboarding-logo">🇬🇷</div>
+      <h1 class="onboarding-title">Добро пожаловать в IziSpanish</h1>
+      <p class="onboarding-subtitle">Греческий для жизни на Кипре и в Греции</p>
+
+      <div class="onboarding-features">
+        <div class="onboarding-feature">
+          <div class="onboarding-feature-icon">🎯</div>
+          <div class="onboarding-feature-text">
+            <strong>Глаголы A2</strong>
+            <span>300+ глаголов с транскрипцией и примерами</span>
+          </div>
+        </div>
+        <div class="onboarding-feature">
+          <div class="onboarding-feature-icon">🎭</div>
+          <div class="onboarding-feature-text">
+            <strong>Сценарии</strong>
+            <span>Реальные диалоги: врач, банк, магазин, KEП</span>
+          </div>
+        </div>
+        <div class="onboarding-feature">
+          <div class="onboarding-feature-icon">💬</div>
+          <div class="onboarding-feature-text">
+            <strong>Фразы</strong>
+            <span>Живой разговорный греческий — как говорят на улице</span>
+          </div>
+        </div>
+        <div class="onboarding-feature">
+          <div class="onboarding-feature-icon">📚</div>
+          <div class="onboarding-feature-text">
+            <strong>Словарь</strong>
+            <span>800+ слов по темам с карточками и квизами</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="onboarding-tip">
+        💡 10 минут в день — и через месяц ты заговоришь по-гречески
+      </div>
+
+      <button class="btn-primary onboarding-btn" onclick="finishOnboarding()">
+        Начать учить греческий 🚀
+      </button>
+    </div>
+  </div>
+
+  <div id="screen-paywall" class="screen">
+    <div class="paywall-container">
+      <div class="paywall-icon">🇬🇷</div>
+      <h2 class="paywall-title">Оформите подписку</h2>
+      <p class="paywall-subtitle">Выберите план и получите полный доступ к IziSpanish</p>
+
+      <div class="paywall-plans">
+        <div class="paywall-plan">
+          <div class="paywall-plan-name">Помесячно</div>
+          <div class="paywall-plan-price">€8.99 <span>/мес</span></div>
+          <a id="paywall-monthly-btn" href="#" target="_blank" class="paywall-btn-secondary">Начать — 7 дней бесплатно</a>
+        </div>
+        <div class="paywall-plan paywall-plan-popular">
+          <div class="paywall-plan-badge">Выгоднее на 45%</div>
+          <div class="paywall-plan-name">Годовая</div>
+          <div class="paywall-plan-price">€4.99 <span>/мес</span></div>
+          <div class="paywall-plan-billed">€59.88 в год</div>
+          <a id="paywall-annual-btn" href="#" target="_blank" class="paywall-btn-primary">Начать — 7 дней бесплатно</a>
+        </div>
+      </div>
+
+      <p class="paywall-note">7 дней бесплатно · Отмена в любой момент</p>
+      <button class="paywall-signout" onclick="signOut()">Выйти из аккаунта</button>
+    </div>
+  </div>
+
+  <!-- ==================== HOME ==================== -->
+  <div id="screen-home" class="screen">
+    <div class="home-header">
+      <div class="home-top-row">
+        <div class="home-flag">🇬🇷</div>
+        <button class="btn-user-info" onclick="showUserMenu()" id="user-avatar-btn">
+          <img id="user-avatar" src="" alt="" style="display:none">
+          <span id="user-initials"></span>
+        </button>
+      </div>
+      <h1 class="app-title">Греческий для Грека</h1>
+      <p class="app-subtitle" id="app-subtitle">Γεια σου! Продолжаем путь к гражданству.</p>
+    </div>
+    <div class="user-menu" id="user-menu" style="display:none">
+      <div class="user-menu-name" id="user-menu-name"></div>
+      <div class="user-menu-email" id="user-menu-email"></div>
+      <button class="btn-settings-link" onclick="hideUserMenu(); showSettings()">⚙️ Настройки</button>
+      <button class="btn-signout" onclick="signOut()">Выйти</button>
+    </div>
+
+    <div class="streak-card" id="streak-card">
+      <div class="streak-icon">🔥</div>
+      <div class="streak-info">
+        <div class="streak-number" id="streak-number">0</div>
+        <div class="streak-label">дней подряд</div>
+      </div>
+    </div>
+
+    <div class="daily-goal-card">
+      <div class="goal-header">
+        <span>Цель на сегодня</span>
+        <div class="goal-right">
+          <span id="daily-xp-display">0 / 50 XP</span>
+          <button class="goal-edit-btn" onclick="showGoalModal()" title="Изменить цель">✏️</button>
+        </div>
+      </div>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="daily-progress"></div>
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <button class="stat-item stat-item-btn" onclick="showProgress('xp')">
+        <div class="stat-value" id="total-xp">0</div>
+        <div class="stat-label">Всего XP</div>
+      </button>
+      <button class="stat-item stat-item-btn" onclick="showProgress('level')">
+        <div class="stat-value" id="level-display">1</div>
+        <div class="stat-label">Уровень</div>
+      </button>
+      <button class="stat-item stat-item-btn" onclick="showProgress('lessons')">
+        <div class="stat-value" id="lessons-done">0</div>
+        <div class="stat-label">Уроков</div>
+      </button>
+    </div>
+
+    <button class="btn-primary lesson-start-btn" onclick="startLesson()">
+      <span id="lesson-btn-text">Урок 1 · 5 слов ▶</span>
+    </button>
+    <div class="lesson-btn-hint">Сначала карточки, потом упражнения</div>
+
+    <div class="nav-grid">
+      <button class="nav-btn" onclick="showScenarios()">
+        <span class="nav-icon">🎭</span>
+        <span class="nav-label">Сценарии</span>
+      </button>
+      <button class="nav-btn" onclick="showVerbTable()">
+        <span class="nav-icon">📚</span>
+        <span class="nav-label">Глаголы</span>
+      </button>
+      <button class="nav-btn" onclick="showPlan()">
+        <span class="nav-icon">📅</span>
+        <span class="nav-label">30 дней</span>
+      </button>
+      <button class="nav-btn" onclick="showPhrases()">
+        <span class="nav-icon">💬</span>
+        <span class="nav-label">Фразы</span>
+      </button>
+      <button class="nav-btn" onclick="showAudit()">
+        <span class="nav-icon">📊</span>
+        <span class="nav-label">Прогресс</span>
+      </button>
+      <button class="nav-btn" onclick="showVocab('image')">
+        <span class="nav-icon">🖼️</span>
+        <span class="nav-label">Карточки</span>
+      </button>
+      <button class="nav-btn" onclick="showVocab('translation')">
+        <span class="nav-icon">📝</span>
+        <span class="nav-label">Перевод</span>
+      </button>
+      <button class="nav-btn" onclick="showQuiz()">
+        <span class="nav-icon">🧩</span>
+        <span class="nav-label">Квизы</span>
+      </button>
+      <button class="nav-btn" onclick="showNews()">
+        <span class="nav-icon">📰</span>
+        <span class="nav-label">Новости</span>
+      </button>
+      <button class="nav-btn" onclick="showAchievements()">
+        <span class="nav-icon">🏅</span>
+        <span class="nav-label">Достижения</span>
+        <span class="ach-nav-count" id="ach-nav-count">0/15</span>
+      </button>
+      <button class="nav-btn nav-btn-feed" onclick="showFeed()">
+        <span class="nav-icon">👥</span>
+        <span class="nav-label">Лента</span>
+        <span class="feed-nav-badge" id="feed-nav-badge" style="display:none"></span>
+      </button>
+      <button class="nav-btn" onclick="showBlog()">
+        <span class="nav-icon">📝</span>
+        <span class="nav-label">Блог</span>
+      </button>
+      <button class="nav-btn nav-btn-exam nav-btn-wide" onclick="showExamPrep()">
+        <span class="nav-icon">🎓</span>
+        <span class="nav-label">Подготовка к экзамену</span>
+      </button>
+      <button class="nav-btn nav-btn-speech nav-btn-wide" onclick="showSpeechTraining()">
+        <span class="nav-icon">🎤</span>
+        <span class="nav-label">Тренировка речи</span>
+      </button>
+    </div>
+
+    <button class="weak-lesson-btn" id="weak-lesson-btn" onclick="startWeakLesson()" style="display:none">
+      <span class="weak-lesson-icon">⚠️</span>
+      <div class="weak-lesson-text">
+        <div class="weak-lesson-title">Повторить слабые места</div>
+        <div class="weak-lesson-sub">Ошибок: <span id="weak-verbs-count">0 глаголов</span></div>
+      </div>
+      <span class="weak-lesson-arrow">→</span>
+    </button>
+
+    <button class="srs-review-btn" id="srs-review-btn" onclick="startSrsLesson()" style="display:none">
+      <span class="weak-lesson-icon">🧠</span>
+      <div class="weak-lesson-text">
+        <div class="weak-lesson-title">Интервальное повторение</div>
+        <div class="weak-lesson-sub">Пора повторить: <span id="srs-due-count">0 глаголов</span></div>
+      </div>
+      <span class="weak-lesson-arrow">→</span>
+    </button>
+    <button class="support-btn" onclick="showSupportForm()">💬 Написать в поддержку</button>
+    <button class="support-btn" onclick="showPwaGuide()" style="margin-top:0">📲 Установить как приложение</button>
+  </div>
+
+  <!-- ==================== PWA GUIDE MODAL ==================== -->
+  <div id="pwa-modal" class="modal-overlay" onclick="hidePwaGuide()" style="display:none">
+    <div class="modal-box pwa-modal-box" onclick="event.stopPropagation()">
+      <div class="support-modal-header">
+        <div class="support-modal-title">📲 Установить приложение</div>
+        <button class="modal-close-btn" onclick="hidePwaGuide()">✕</button>
+      </div>
+      <div class="pwa-guide-body">
+        <p class="pwa-guide-intro">Неважно, <strong>Android</strong> у вас или <strong>iPhone</strong> — можно установить IziSpanish прямо на экран телефона. Работает как полноценное приложение.</p>
+
+        <div class="pwa-os-block">
+          <div class="pwa-os-title">🍎 iPhone / iPad (Safari)</div>
+          <ol class="pwa-steps">
+            <li>Откройте <strong>cabinet.izispanish.com</strong> в браузере <strong>Safari</strong></li>
+            <li>Нажмите кнопку <strong>«Поделиться»</strong> внизу экрана — значок квадрата со стрелкой вверх <span class="pwa-icon-hint">⬆</span></li>
+            <li>Прокрутите список вниз и выберите <strong>«На экран "Домой"»</strong></li>
+            <li>Нажмите <strong>«Добавить»</strong> в правом верхнем углу</li>
+            <li>Готово — значок IziSpanish появится на рабочем столе 🎉</li>
+          </ol>
+        </div>
+
+        <div class="pwa-os-block">
+          <div class="pwa-os-title">🤖 Android (Chrome)</div>
+          <ol class="pwa-steps">
+            <li>Откройте <strong>cabinet.izispanish.com</strong> в браузере <strong>Chrome</strong></li>
+            <li>Нажмите <strong>три точки ⋮</strong> в правом верхнем углу</li>
+            <li>Выберите <strong>«Добавить на главный экран»</strong></li>
+            <li>Нажмите <strong>«Установить»</strong> или <strong>«Добавить»</strong></li>
+            <li>Готово — откройте приложение с рабочего стола 🎉</li>
+          </ol>
+        </div>
+
+        <div class="pwa-reason-box">
+          <div class="pwa-reason-icon">💡</div>
+          <div class="pwa-reason-text">Благодаря этому IziSpanish стоит <strong>дешевле аналогов</strong> — нам не нужно платить комиссию App Store и Google Play (до 30% от цены). Эту экономию мы передаём вам.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SUPPORT MODAL ==================== -->
+  <div id="support-modal" class="modal-overlay" onclick="hideSupportForm()" style="display:none">
+    <div class="modal-box support-modal-box" onclick="event.stopPropagation()">
+      <div class="support-modal-header">
+        <div class="support-modal-title">Написать в поддержку</div>
+        <button class="modal-close-btn" onclick="hideSupportForm()">✕</button>
+      </div>
+      <div id="support-form-wrap">
+        <div class="support-form-desc">Ответим в течение 24 часов 🇬🇷</div>
+        <div class="support-field">
+          <label class="support-label">Ваше имя *</label>
+          <input id="sf-name" class="support-input" type="text" placeholder="Как к вам обращаться?" maxlength="100">
+        </div>
+        <div class="support-field">
+          <label class="support-label">Email *</label>
+          <input id="sf-email" class="support-input" type="email" placeholder="your@email.com" maxlength="100">
+        </div>
+        <div class="support-field">
+          <label class="support-label">Телефон (WhatsApp / Telegram)</label>
+          <input id="sf-phone" class="support-input" type="tel" placeholder="+7 999 123-45-67" maxlength="30">
+        </div>
+        <div class="support-field">
+          <label class="support-label">Тема обращения *</label>
+          <select id="sf-subject" class="support-input support-select">
+            <option value="">— выберите тему —</option>
+            <option value="Технический вопрос">Технический вопрос</option>
+            <option value="Подписка и оплата">Подписка и оплата</option>
+            <option value="Ошибка в материалах">Ошибка в материалах</option>
+            <option value="Предложение по улучшению">Предложение по улучшению</option>
+            <option value="Другое">Другое</option>
+          </select>
+        </div>
+        <div class="support-field">
+          <label class="support-label">Сообщение *</label>
+          <textarea id="sf-message" class="support-input support-textarea"
+            placeholder="Опишите ваш вопрос подробно..." maxlength="2000"></textarea>
+        </div>
+        <button class="btn-primary support-submit-btn" onclick="submitSupportForm()">Отправить</button>
+      </div>
+      <div id="support-success" style="display:none" class="support-success">
+        <div class="support-success-icon">✅</div>
+        <div class="support-success-title">Заявка отправлена!</div>
+        <div class="support-success-sub">Ответим в течение 24 часов на ваш email.</div>
+        <button class="btn-secondary" onclick="hideSupportForm()" style="margin-top:16px">Закрыть</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== LESSON ==================== -->
+  <div id="screen-lesson" class="screen">
+    <div class="lesson-header">
+      <button class="btn-back-sm" onclick="showHome()" title="Выйти из урока">✕</button>
+      <div class="hearts" id="hearts-display"></div>
+      <div class="lesson-progress-wrap">
+        <div class="lesson-progress-bg">
+          <div class="lesson-progress-fill" id="lesson-progress"></div>
+        </div>
+      </div>
+      <div class="lesson-xp">⚡<span id="lesson-xp">0</span></div>
+    </div>
+    <div class="exercise-container">
+      <div class="exercise-type-label" id="exercise-label"></div>
+      <div class="exercise-question" id="exercise-question"></div>
+      <div class="exercise-subtitle" id="exercise-subtitle"></div>
+      <div class="options-grid" id="options-grid"></div>
+    </div>
+    <div class="lesson-footer" id="lesson-footer">
+      <div class="feedback-message" id="feedback-message"></div>
+      <button class="btn-primary" id="continue-btn" onclick="nextExercise()">Продолжить</button>
+    </div>
+  </div>
+
+  <!-- ==================== COMPLETE ==================== -->
+  <div id="screen-complete" class="screen">
+    <div class="complete-content">
+      <div class="complete-animation">🎉</div>
+      <h2>Урок завершён!</h2>
+      <div class="complete-stars" id="complete-stars">⭐⭐⭐</div>
+      <div class="complete-stats">
+        <div class="complete-stat">
+          <div class="complete-stat-icon">⚡</div>
+          <div class="complete-stat-value" id="complete-xp">+0</div>
+          <div class="complete-stat-label">XP</div>
+        </div>
+        <div class="complete-stat">
+          <div class="complete-stat-icon">✅</div>
+          <div class="complete-stat-value" id="complete-correct">0/10</div>
+          <div class="complete-stat-label">правильных</div>
+        </div>
+        <div class="complete-stat">
+          <div class="complete-stat-icon">❤️</div>
+          <div class="complete-stat-value" id="complete-hearts">3</div>
+          <div class="complete-stat-label">жизней</div>
+        </div>
+        <div class="complete-stat">
+          <div class="complete-stat-icon">🔥</div>
+          <div class="complete-stat-value" id="complete-streak">0</div>
+          <div class="complete-stat-label">дней подряд</div>
+        </div>
+      </div>
+      <div class="complete-goal-msg" id="complete-goal-msg" style="display:none">Цель дня выполнена! 🎯</div>
+      <button class="btn-primary" onclick="showHome()">На главную</button>
+    </div>
+  </div>
+
+  <!-- ==================== SCENARIOS LIST ==================== -->
+  <div id="screen-scenarios" class="screen">
+    <div class="sub-header">
+      <button class="btn-back" onclick="showHome()">← Назад</button>
+      <h2>Сценарии</h2>
+    </div>
+    <p class="sub-desc">8 реальных ситуаций: магазины, ресторан, аптека, банк, ΚΕΠ, такси, переговоры, гражданство.</p>
+    <div id="scenarios-list"></div>
+  </div>
+
+  <!-- ==================== SCENARIO DETAIL ==================== -->
+  <div id="screen-scenario-detail" class="screen">
+    <div class="lesson-header">
+      <button class="btn-back-sm" onclick="showScenarios()">✕</button>
+      <div class="lesson-progress-wrap">
+        <div class="lesson-progress-bg">
+          <div class="lesson-progress-fill" id="scenario-progress-fill"></div>
+        </div>
+      </div>
+      <div class="scenario-step-counter" id="scenario-step-counter">1/3</div>
+    </div>
+    <div class="scenario-title-bar" id="scenario-title-bar"></div>
+    <div id="scenario-step-container"></div>
+  </div>
+
+  <!-- ==================== SCENARIO COMPLETE ==================== -->
+  <div id="screen-scenario-complete" class="screen">
+    <div class="complete-content">
+      <div class="complete-animation" id="scenario-complete-icon">🏆</div>
+      <h2 id="scenario-complete-title">Сценарий пройден!</h2>
+      <div class="complete-stars" id="scenario-complete-stars">⭐⭐⭐</div>
+      <p class="scenario-complete-msg" id="scenario-complete-msg"></p>
+      <div class="complete-stats">
+        <div class="complete-stat">
+          <div class="complete-stat-icon">✅</div>
+          <div class="complete-stat-value" id="scenario-score">0/3</div>
+          <div class="complete-stat-label">правильных</div>
+        </div>
+        <div class="complete-stat">
+          <div class="complete-stat-icon">⚡</div>
+          <div class="complete-stat-value" id="scenario-xp">+0 XP</div>
+          <div class="complete-stat-label">заработано</div>
+        </div>
+      </div>
+      <button class="btn-primary" onclick="showScenarios()">Ещё сценарии</button>
+      <button class="btn-secondary" onclick="showHome()" style="margin-top:10px">На главную</button>
+    </div>
+  </div>
+
+  <!-- ==================== VERB TABLE ==================== -->
+  <div id="screen-verbs" class="screen">
+    <div class="sub-header">
+      <button class="btn-back" onclick="showHome()">← Назад</button>
+      <h2>Глаголы</h2>
+      <span class="badge" id="verb-count-badge">45</span>
+    </div>
+    <input type="search" id="verb-search" class="verb-search-input" placeholder="Поиск по-гречески или по-русски..." oninput="filterVerbs(this.value)">
+    <div id="verb-table-container"></div>
+  </div>
+
+  <!-- ==================== 30-DAY PLAN ==================== -->
+  <div id="screen-plan" class="screen">
+    <div class="sub-header">
+      <button class="btn-back" onclick="showHome()">← Назад</button>
+      <h2>30-дневный план</h2>
+    </div>
+    <p class="sub-desc">Стратегия от A2 до собеседования на гражданство.</p>
+    <div id="plan-container"></div>
+  </div>
+
+  <!-- ==================== AUDIT ==================== -->
+  <div id="screen-audit" class="screen">
+    <div class="sub-header">
+      <button class="btn-back" onclick="showHome()">← Назад</button>
+      <h2>Мой прогресс</h2>
+    </div>
+    <div id="audit-container"></div>
+  </div>
+
+  <!-- ==================== NEWS ==================== -->
+  <div id="screen-news" class="screen">
+    <div class="sub-header">
+      <button class="btn-back" onclick="showHome()">← Назад</button>
+      <h2>Новости</h2>
+      <span class="news-refresh-badge" id="news-refresh-badge" onclick="manualRefreshNews()" title="Обновить">🔄</span>
+    </div>
+    <div class="news-tabs-wrap">
+      <div class="news-tabs" id="news-tabs"></div>
+    </div>
+    <div id="news-feed"></div>
+    <div class="word-tooltip" id="word-tooltip">
+      <div class="word-tooltip-original" id="word-tooltip-original"></div>
+      <div class="word-tooltip-translation" id="word-tooltip-translation"></div>
+    </div>
+  </div>
+
+  <!-- ==================== VOCAB CATEGORY LIST ==================== -->
+  <div id="screen-vocab" class="screen">
+    <div class="sub-header">
+      <button class="btn-back" onclick="showHome()">← Назад</button>
+      <h2 id="vocab-screen-title">Карточки</h2>
+    </div>
+    <div class="search-wrap">
+      <input id="vocab-search" class="search-input" type="search" placeholder="🔍 Найти слово..." oninput="searchVocab(this.value)" autocomplete="off">
+    </div>
+    <div id="vocab-search-results" style="display:none"></div>
+    <div id="vocab-categories-list"></div>
+  </div>
+
+  <!-- ==================== VOCAB QUIZ ==================== -->
+  <div id="screen-vocab-quiz" class="screen">
+    <div class="lesson-header">
+      <button class="btn-back-sm" onclick="exitVocabQuiz()">✕</button>
+      <div class="lesson-progress-wrap">
+        <div class="lesson-progress-bg">
+          <div class="lesson-progress-fill" id="vocab-progress"></div>
+        </div>
+      </div>
+      <div class="lesson-xp">⭐<span id="vocab-score">0</span></div>
+    </div>
+    <div class="vocab-quiz-container" id="vocab-quiz-container"></div>
+    <div class="lesson-footer" id="vocab-footer">
+      <div class="feedback-message" id="vocab-feedback"></div>
+      <button class="btn-primary" id="vocab-continue-btn" onclick="nextVocabWord()">Продолжить</button>
+    </div>
+  </div>
+
+  <!-- ==================== VOCAB COMPLETE ==================== -->
+  <div id="screen-vocab-complete" class="screen">
+    <div class="complete-content">
+      <div class="complete-animation">🎉</div>
+      <h2>Раздел пройден!</h2>
+      <div class="complete-stars" id="vocab-complete-stars">⭐⭐⭐</div>
+      <div class="complete-stats">
+        <div class="complete-stat">
+          <div class="complete-stat-icon">✅</div>
+          <div class="complete-stat-value" id="vocab-complete-score">0/10</div>
+          <div class="complete-stat-label">правильных</div>
+        </div>
+        <div class="complete-stat">
+          <div class="complete-stat-icon">⚡</div>
+          <div class="complete-stat-value" id="vocab-complete-xp">+0</div>
+          <div class="complete-stat-label">XP</div>
+        </div>
+      </div>
+      <button class="btn-primary" onclick="restartVocabQuiz()" style="max-width:320px">Играть снова</button>
+      <button class="btn-secondary" onclick="exitVocabQuiz()" style="margin-top:10px;max-width:320px">Другая категория</button>
+    </div>
+  </div>
+
+  <!-- ==================== QUIZ CATEGORY LIST ==================== -->
+  <div id="screen-quiz" class="screen">
+    <div class="sub-header">
+      <button class="btn-back" onclick="showHome()">← Назад</button>
+      <h2>Квизы</h2>
+    </div>
+    <p class="sub-desc">Расставь слова в правильном порядке. 10 предложений за раунд.</p>
+    <div id="quiz-categories-list"></div>
+  </div>
+
+  <!-- ==================== QUIZ SESSION ==================== -->
+  <div id="screen-quiz-session" class="screen">
+    <div class="lesson-header">
+      <button class="btn-back-sm" onclick="exitQuiz()">✕</button>
+      <div class="lesson-progress-wrap">
+        <div class="lesson-progress-bg">
+          <div class="lesson-progress-fill" id="quiz-progress"></div>
+        </div>
+      </div>
+      <div class="lesson-xp">⚡<span id="quiz-xp">0</span></div>
+    </div>
+    <div class="quiz-session-container" id="quiz-session-container"></div>
+    <div class="lesson-footer" id="quiz-footer">
+      <div class="feedback-message" id="quiz-feedback"></div>
+      <button class="btn-primary" id="quiz-continue-btn" onclick="nextQuizSentence()">Продолжить</button>
+    </div>
+  </div>
+
+  <!-- ==================== QUIZ COMPLETE ==================== -->
+  <div id="screen-quiz-complete" class="screen">
+    <div class="complete-content">
+      <div class="complete-animation">🏆</div>
+      <h2>Раунд завершён!</h2>
+      <div class="complete-stars" id="quiz-complete-stars">⭐⭐⭐</div>
+      <div class="complete-stats">
+        <div class="complete-stat">
+          <div class="complete-stat-icon">✅</div>
+          <div class="complete-stat-value" id="quiz-complete-score">0/10</div>
+          <div class="complete-stat-label">правильных</div>
+        </div>
+        <div class="complete-stat">
+          <div class="complete-stat-icon">⚡</div>
+          <div class="complete-stat-value" id="quiz-complete-xp">+0</div>
+          <div class="complete-stat-label">XP</div>
+        </div>
+      </div>
+      <button class="btn-primary" onclick="restartQuiz()" style="max-width:320px">Ещё раз</button>
+      <button class="btn-secondary" onclick="showQuiz()" style="margin-top:10px;max-width:320px">Другая тема</button>
+    </div>
+  </div>
+
+  <!-- ==================== PHRASES ==================== -->
+  <div id="screen-phrases" class="screen">
+    <div class="sub-header">
+      <button class="btn-back" onclick="showHome()">← Назад</button>
+      <h2>Фразы и выражения</h2>
+    </div>
+    <div class="search-wrap">
+      <input id="phrases-search" class="search-input" type="search" placeholder="🔍 Найти фразу..." oninput="searchPhrases(this.value)" autocomplete="off">
+    </div>
+    <div id="phrases-search-results" style="display:none"></div>
+    <p class="sub-desc" id="phrases-sub-desc">Живой язык — то, как греки говорят на самом деле.</p>
+    <div class="phrase-cats" id="phrase-cats"></div>
+    <div id="phrases-container"></div>
+  </div>
+
+  <!-- ==================== ACHIEVEMENTS ==================== -->
+  <!-- ==================== SETTINGS ==================== -->
+  <div id="screen-settings" class="screen">
+    <div class="sub-header">
+      <button class="btn-back" onclick="showHome()">← Назад</button>
+      <h2>Настройки</h2>
+    </div>
+
+    <!-- User card -->
+    <div class="settings-user-card">
+      <img id="settings-avatar" src="" alt="" class="settings-avatar" style="display:none">
+      <div class="settings-initials" id="settings-initials"></div>
+      <div class="settings-user-info">
+        <div class="settings-user-name" id="settings-user-name"></div>
+        <div class="settings-user-email" id="settings-user-email"></div>
+      </div>
+    </div>
+
+    <!-- Daily goal -->
+    <div class="settings-section">
+      <div class="settings-section-title">Ежедневная цель</div>
+      <div class="settings-goal-options">
+        <button class="settings-goal-btn" data-xp="30" onclick="setDailyGoal(30)">
+          <span class="goal-emoji">🌱</span>
+          <span class="goal-label">Легко</span>
+          <span class="goal-xp">30 XP</span>
+        </button>
+        <button class="settings-goal-btn" data-xp="50" onclick="setDailyGoal(50)">
+          <span class="goal-emoji">🔥</span>
+          <span class="goal-label">Средне</span>
+          <span class="goal-xp">50 XP</span>
+        </button>
+        <button class="settings-goal-btn" data-xp="100" onclick="setDailyGoal(100)">
+          <span class="goal-emoji">⚡</span>
+          <span class="goal-label">Интенсивно</span>
+          <span class="goal-xp">100 XP</span>
+        </button>
+        <button class="settings-goal-btn" data-xp="150" onclick="setDailyGoal(150)">
+          <span class="goal-emoji">🏆</span>
+          <span class="goal-label">Максимум</span>
+          <span class="goal-xp">150 XP</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Notifications -->
+    <div class="settings-section">
+      <div class="settings-section-title">Уведомления</div>
+      <div class="settings-row" onclick="togglePushSetting()">
+        <div class="settings-row-icon">🔔</div>
+        <div class="settings-row-body">
+          <div class="settings-row-title">Ежедневные напоминания</div>
+          <div class="settings-row-sub">Напоминание позаниматься каждый день</div>
+        </div>
+        <div class="settings-toggle" id="push-toggle">
+          <div class="settings-toggle-knob"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="settings-section">
+      <div class="settings-section-title">Прогресс</div>
+      <div class="settings-stats-grid">
+        <div class="settings-stat">
+          <div class="settings-stat-value" id="s-total-xp">0</div>
+          <div class="settings-stat-label">всего XP</div>
+        </div>
+        <div class="settings-stat">
+          <div class="settings-stat-value" id="s-lessons">0</div>
+          <div class="settings-stat-label">уроков</div>
+        </div>
+        <div class="settings-stat">
+          <div class="settings-stat-value" id="s-streak">0</div>
+          <div class="settings-stat-label">серия дней</div>
+        </div>
+        <div class="settings-stat">
+          <div class="settings-stat-value" id="s-vocab">0</div>
+          <div class="settings-stat-label">слов выучено</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sign out -->
+    <div class="settings-section">
+      <button class="btn-signout-full" onclick="signOut()">Выйти из аккаунта</button>
+    </div>
+
+    <div class="settings-version">IziSpanish v1.0 · cabinet.izispanish.com</div>
+  </div>
+
+  <div id="screen-achievements" class="screen">
+    <div class="sub-header">
+      <button class="btn-back" onclick="showHome()">← Назад</button>
+      <h2>Достижения</h2>
+      <span class="badge" id="ach-badge">0/15</span>
+    </div>
+    <p class="sub-desc">Каждый шаг на пути к гражданству Греции.</p>
+    <div id="achievements-container"></div>
+  </div>
+
+  <!-- ==================== FEED ==================== -->
+  <div id="screen-feed" class="screen">
+    <div class="sub-header">
+      <button class="btn-back" onclick="showHome()">← Назад</button>
+      <h2>Лента</h2>
+      <span class="feed-live-dot" title="Обновляется в реальном времени"></span>
+    </div>
+
+    <!-- Composer -->
+    <div class="feed-composer">
+      <div class="feed-composer-row">
+        <div id="composer-avatar-wrap"></div>
+        <textarea id="composer-text" class="feed-composer-textarea"
+          placeholder="Поделись успехом, мыслью или вопросом... 🇪🇸"
+          maxlength="1000"></textarea>
+      </div>
+      <div class="feed-composer-footer">
+        <span class="composer-char-count" id="composer-char-count"></span>
+        <button class="btn-primary composer-submit-btn" id="composer-submit" onclick="submitPost()" disabled>Опубликовать</button>
+      </div>
+    </div>
+
+    <div id="feed-container">
+      <div class="feed-loading">Загружаем ленту...</div>
+    </div>
+  </div>
+
+  <!-- ==================== PROGRESS DASHBOARD ==================== -->
+  <div id="screen-progress" class="screen">
+    <div class="sub-header">
+      <button class="btn-back" onclick="showHome()">← Назад</button>
+      <h2>Мой прогресс</h2>
+    </div>
+
+    <!-- Tabs -->
+    <div class="progress-tabs">
+      <button class="progress-tab active" id="tab-xp"      onclick="switchProgressTab('xp')">⚡ XP</button>
+      <button class="progress-tab"        id="tab-level"   onclick="switchProgressTab('level')">🏆 Лига</button>
+      <button class="progress-tab"        id="tab-lessons" onclick="switchProgressTab('lessons')">📖 Уроки</button>
+    </div>
+
+    <!-- XP Panel -->
+    <div class="progress-panel" id="panel-xp">
+      <div class="progress-hero">
+        <div class="progress-hero-icon">⚡</div>
+        <div class="progress-hero-value" id="pg-total-xp">0</div>
+        <div class="progress-hero-label">очков опыта</div>
+        <div class="progress-hero-sub" id="pg-xp-days"></div>
+      </div>
+      <div class="progress-card">
+        <div class="progress-card-title">До следующего уровня</div>
+        <div class="progress-bar-bg" style="height:12px;border-radius:99px">
+          <div class="progress-bar-fill" id="pg-xp-bar" style="border-radius:99px"></div>
+        </div>
+        <div class="progress-card-hint" id="pg-xp-bar-label"></div>
+      </div>
+      <div class="progress-stats-grid">
+        <div class="progress-stat-box">
+          <div class="progress-stat-val" id="pg-daily-xp">0</div>
+          <div class="progress-stat-lbl">XP сегодня</div>
+        </div>
+        <div class="progress-stat-box">
+          <div class="progress-stat-val" id="pg-streak-xp">0</div>
+          <div class="progress-stat-lbl">🔥 серия дней</div>
+        </div>
+        <div class="progress-stat-box">
+          <div class="progress-stat-val" id="pg-avg-xp">0</div>
+          <div class="progress-stat-lbl">XP / урок</div>
+        </div>
+        <div class="progress-stat-box">
+          <div class="progress-stat-val" id="pg-goal-xp">0</div>
+          <div class="progress-stat-lbl">цель XP</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Level / League Panel -->
+    <div class="progress-panel" id="panel-level" style="display:none">
+      <div class="league-hero">
+        <div class="league-badge" id="pg-league-badge"></div>
+        <div class="league-name" id="pg-league-name"></div>
+        <div class="league-level-row">
+          <span class="league-level-label">Уровень</span>
+          <span class="league-level-val" id="pg-level-val"></span>
+        </div>
+      </div>
+      <div class="progress-card">
+        <div class="progress-card-title" id="pg-league-progress-title"></div>
+        <div class="progress-bar-bg" style="height:14px;border-radius:99px">
+          <div class="progress-bar-fill" id="pg-league-bar" style="border-radius:99px"></div>
+        </div>
+        <div class="progress-card-hint" id="pg-league-bar-label"></div>
+      </div>
+      <div class="leagues-list">
+        <div class="league-row" id="league-bronze">
+          <span class="league-row-icon">🥉</span>
+          <div class="league-row-info">
+            <div class="league-row-name">Бронзовая лига</div>
+            <div class="league-row-range">Уровни 1–10</div>
+          </div>
+          <span class="league-row-check" id="lcheck-bronze"></span>
+        </div>
+        <div class="league-row" id="league-silver">
+          <span class="league-row-icon">🥈</span>
+          <div class="league-row-info">
+            <div class="league-row-name">Серебряная лига</div>
+            <div class="league-row-range">Уровни 11–30</div>
+          </div>
+          <span class="league-row-check" id="lcheck-silver"></span>
+        </div>
+        <div class="league-row" id="league-gold">
+          <span class="league-row-icon">🥇</span>
+          <div class="league-row-info">
+            <div class="league-row-name">Золотая лига</div>
+            <div class="league-row-range">Уровни 31–50</div>
+          </div>
+          <span class="league-row-check" id="lcheck-gold"></span>
+        </div>
+        <div class="league-row" id="league-platinum">
+          <span class="league-row-icon">💎</span>
+          <div class="league-row-info">
+            <div class="league-row-name">Платиновая лига</div>
+            <div class="league-row-range">Уровни 51–100</div>
+          </div>
+          <span class="league-row-check" id="lcheck-platinum"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lessons Panel -->
+    <div class="progress-panel" id="panel-lessons" style="display:none">
+      <div class="progress-hero">
+        <div class="progress-hero-icon">📖</div>
+        <div class="progress-hero-value" id="pg-lessons-val">0</div>
+        <div class="progress-hero-label">уроков пройдено</div>
+        <div class="progress-hero-sub" id="pg-lessons-sub"></div>
+      </div>
+      <div class="lessons-milestones" id="pg-milestones"></div>
+      <div class="progress-stats-grid">
+        <div class="progress-stat-box">
+          <div class="progress-stat-val" id="pg-scenarios">0</div>
+          <div class="progress-stat-lbl">сценариев</div>
+        </div>
+        <div class="progress-stat-box">
+          <div class="progress-stat-val" id="pg-vocab-learned">0</div>
+          <div class="progress-stat-lbl">слов выучено</div>
+        </div>
+        <div class="progress-stat-box">
+          <div class="progress-stat-val" id="pg-achievements">0</div>
+          <div class="progress-stat-lbl">достижений</div>
+        </div>
+        <div class="progress-stat-box">
+          <div class="progress-stat-val" id="pg-streak-lessons">0</div>
+          <div class="progress-stat-lbl">🔥 серия</div>
+        </div>
+      </div>
+      <div class="progress-card progress-motivation" id="pg-motivation"></div>
+    </div>
+  </div>
+
+  <!-- ==================== ACHIEVEMENT TOAST ==================== -->
+  <div id="achievement-toast" class="achievement-toast">
+    <div class="toast-icon" id="toast-icon">🏆</div>
+    <div class="toast-content">
+      <div class="toast-label">Достижение разблокировано!</div>
+      <div class="toast-title" id="toast-title"></div>
+      <div class="toast-desc" id="toast-desc"></div>
+    </div>
+  </div>
+
+  <!-- ==================== GOAL MODAL ==================== -->
+  <div id="goal-modal" class="modal-overlay" onclick="hideGoalModal()" style="display:none">
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <div class="modal-title">Цель на день</div>
+      <div class="goal-options">
+        <button class="goal-option-btn" data-xp="30" onclick="setDailyGoal(30)">30 XP <span class="goal-hint">расслабленно</span></button>
+        <button class="goal-option-btn" data-xp="50" onclick="setDailyGoal(50)">50 XP <span class="goal-hint">стандарт</span></button>
+        <button class="goal-option-btn" data-xp="100" onclick="setDailyGoal(100)">100 XP <span class="goal-hint">интенсивно</span></button>
+        <button class="goal-option-btn" data-xp="150" onclick="setDailyGoal(150)">150 XP <span class="goal-hint">марафон</span></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll to top button -->
+  <!-- ==================== BLOG ==================== -->
+  <div id="screen-blog" class="screen">
+    <div class="sub-header">
+      <button class="btn-back" onclick="showHome()">← Назад</button>
+      <h2>Блог</h2>
+    </div>
+    <div id="blog-list"></div>
+  </div>
+
+  <!-- ==================== BLOG ARTICLE ==================== -->
+  <div id="screen-blog-article" class="screen">
+    <div class="sub-header">
+      <button class="btn-back" onclick="showBlog()">← Блог</button>
+      <h2 id="blog-article-title" style="font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:220px"></h2>
+    </div>
+    <iframe id="blog-article-frame" src="" style="width:100%;border:none;min-height:calc(100vh - 60px);display:block"></iframe>
+  </div>
+
+  <!-- ==================== SPEECH CATEGORIES ==================== -->
+  <div id="screen-speech-categories" class="screen speech-dark-screen">
+    <div class="speech-header">
+      <button class="speech-back-btn" onclick="showHome()">✕</button>
+      <div class="speech-cat-title">Тренировка речи</div>
+    </div>
+    <div class="speech-cat-desc">Выбери категорию для тренировки произношения</div>
+    <div id="speech-categories-list" class="speech-categories-list"></div>
+  </div>
+
+  <!-- ==================== SPEECH TRAINING ==================== -->
+  <div id="screen-speech" class="screen speech-dark-screen">
+    <div class="speech-header">
+      <button class="speech-back-btn" onclick="exitSpeechTraining()">✕</button>
+      <div class="speech-progress-wrap">
+        <div class="speech-progress-bg">
+          <div class="speech-progress-fill" id="speech-progress"></div>
+        </div>
+      </div>
+      <div class="speech-counter" id="speech-counter">1/15</div>
+    </div>
+
+    <div class="speech-content">
+      <div class="speech-character-row">
+        <div class="speech-character" id="speech-character">👩‍🏫</div>
+        <div class="speech-bubble-wrap">
+          <div class="speech-bubble-badge" id="speech-bubble-badge" style="display:none">
+            <span class="speech-retry-icon">↺</span> ПОПРОБУЙТЕ СНОВА
+          </div>
+          <div class="speech-bubble" id="speech-bubble">Скажите это слово:</div>
+        </div>
+      </div>
+
+      <div class="speech-word-area">
+        <div class="speech-greek-word" id="speech-greek"></div>
+        <div class="speech-transcription" id="speech-transcription"></div>
+        <div class="speech-translation" id="speech-translation"></div>
+      </div>
+    </div>
+
+    <div class="speech-footer">
+      <div class="speech-recognized" id="speech-recognized"></div>
+      <button class="speech-mic-btn speech-mic-idle" id="speech-mic-btn" onclick="onSpeechMicClick()">
+        <span class="speech-mic-icon">🎤</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ==================== SPEECH COMPLETE ==================== -->
+  <div id="screen-speech-complete" class="screen speech-dark-screen">
+    <div class="complete-content">
+      <div class="complete-animation">🎤</div>
+      <h2>Тренировка завершена!</h2>
+      <div class="complete-stars">⭐⭐⭐</div>
+      <div class="complete-stats">
+        <div class="complete-stat">
+          <div class="complete-stat-icon">✅</div>
+          <div class="complete-stat-value" id="speech-complete-correct">0</div>
+          <div class="complete-stat-label">правильно</div>
+        </div>
+        <div class="complete-stat">
+          <div class="complete-stat-icon">⚡</div>
+          <div class="complete-stat-value" id="speech-complete-xp">+0</div>
+          <div class="complete-stat-label">XP</div>
+        </div>
+        <div class="complete-stat">
+          <div class="complete-stat-icon">🎯</div>
+          <div class="complete-stat-value" id="speech-complete-total">15</div>
+          <div class="complete-stat-label">слов</div>
+        </div>
+      </div>
+      <button class="btn-primary" onclick="showSpeechTraining()" style="max-width:320px">Ещё раз</button>
+      <button class="btn-secondary" onclick="showHome()" style="margin-top:10px;max-width:320px">На главную</button>
+    </div>
+  </div>
+
+  <button id="scroll-top-btn" onclick="scrollToTop()" aria-label="Наверх">↑</button>
+
+  <!-- ==================== TEACH PHASE ==================== -->
+  <div id="screen-teach" class="screen">
+    <div class="lesson-header">
+      <button class="btn-back-sm" onclick="showHome()">✕</button>
+      <div class="lesson-progress-wrap">
+        <div class="lesson-progress-bg">
+          <div class="lesson-progress-fill" id="teach-progress"></div>
+        </div>
+      </div>
+      <div class="lesson-xp" id="teach-counter" style="min-width:44px;text-align:center">1/5</div>
+    </div>
+    <div class="teach-phase-label" id="teach-label">Урок 1 · Слово 1 из 5</div>
+    <div class="teach-card-area" id="teach-card-area"></div>
+    <div class="teach-footer">
+      <button class="btn-primary" id="teach-next-btn">Следующее слово →</button>
+    </div>
+  </div>
+
+  <!-- ==================== EXAM PREP ==================== -->
+  <div id="screen-exam" class="screen">
+    <div class="sub-header">
+      <button class="btn-back" onclick="showHome()">← Назад</button>
+      <h2>🎓 К экзамену</h2>
+    </div>
+    <p class="sub-desc">Готовься к A2/B1 шаг за шагом — тесты, грамматика и лайфхаки.</p>
+    <div class="exam-sections">
+      <button class="exam-section-btn exam-section-btn-featured" onclick="showExamSection('structure')">
+        <span class="exam-section-icon">🗺️</span>
+        <div class="exam-section-info">
+          <div class="exam-section-title">Как устроен экзамен</div>
+          <div class="exam-section-sub">4 части · что проверяют · примеры заданий</div>
+        </div>
+        <span class="exam-section-arrow">›</span>
+      </button>
+      <button class="exam-section-btn" onclick="showExamSection('writing')">
+        <span class="exam-section-icon">✍️</span>
+        <div class="exam-section-info">
+          <div class="exam-section-title">Письмо</div>
+          <div class="exam-section-sub">Шаблоны · фразы · 6 тем с примерами</div>
+        </div>
+        <span class="exam-section-arrow">›</span>
+      </button>
+      <button class="exam-section-btn" onclick="showExamSection('speaking')">
+        <span class="exam-section-icon">🗣️</span>
+        <div class="exam-section-info">
+          <div class="exam-section-title">Говорение</div>
+          <div class="exam-section-sub">3 этапа · темы · фразы · TTS</div>
+        </div>
+        <span class="exam-section-arrow">›</span>
+      </button>
+      <button class="exam-section-btn" onclick="showExamSection('grammar')">
+        <span class="exam-section-icon">📚</span>
+        <div class="exam-section-info">
+          <div class="exam-section-title">Грамматика</div>
+          <div class="exam-section-sub">Таблицы, правила, схемы A2/B1</div>
+        </div>
+        <span class="exam-section-arrow">›</span>
+      </button>
+      <button class="exam-section-btn" onclick="showExamSection('tips')">
+        <span class="exam-section-icon">💡</span>
+        <div class="exam-section-info">
+          <div class="exam-section-title">Лайфхаки для экзамена</div>
+          <div class="exam-section-sub">Структура, стратегия, советы</div>
+        </div>
+        <span class="exam-section-arrow">›</span>
+      </button>
+      <button class="exam-section-btn" onclick="showExamSection('tests')">
+        <span class="exam-section-icon">📋</span>
+        <div class="exam-section-info">
+          <div class="exam-section-title">Тесты в формате экзамена</div>
+          <div class="exam-section-sub">Составь предложение — как на B1</div>
+        </div>
+        <span class="exam-section-arrow">›</span>
+      </button>
+      <button class="exam-section-btn" onclick="showExamSection('vocab')">
+        <span class="exam-section-icon">📖</span>
+        <div class="exam-section-info">
+          <div class="exam-section-title">Экзаменационный словарь</div>
+          <div class="exam-section-sub">Слова по темам с переводом</div>
+        </div>
+        <span class="exam-section-arrow">›</span>
+      </button>
+      <button class="exam-section-btn" onclick="showExamSection('listening')">
+        <span class="exam-section-icon">🎧</span>
+        <div class="exam-section-info">
+          <div class="exam-section-title">Аудирование</div>
+          <div class="exam-section-sub">5 текстов · TTS · вопросы на понимание</div>
+        </div>
+        <span class="exam-section-arrow">›</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ==================== EXAM DETAIL ==================== -->
+  <div id="screen-exam-detail" class="screen">
+    <div class="sub-header">
+      <button class="btn-back" onclick="showExamPrep()">← Назад</button>
+      <h2 id="exam-detail-title" style="font-size:16px;"></h2>
+    </div>
+    <div id="exam-detail-body"></div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
