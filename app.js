@@ -406,7 +406,7 @@ function renderProgressLessons() {
     { n: 10,  icon: '⭐', title: '10 уроков',          sub: 'Ты серьёзен!' },
     { n: 30,  icon: '🚀', title: '30 уроков',          sub: 'Месяц практики' },
     { n: 50,  icon: '💪', title: '50 уроков',          sub: 'Полпути к мастерству' },
-    { n: 100, icon: '🏆', title: '100 уроков',         sub: 'Настоящий грек!' },
+    { n: 100, icon: '🏆', title: '100 уроков',         sub: 'Настоящий испанец!' },
   ];
   const nextMilestone = milestones.find(m => m.n > lessons) || milestones[milestones.length - 1];
   document.getElementById('pg-milestones').innerHTML = milestones.map(m => `
@@ -768,7 +768,7 @@ function renderExercise() {
     question.textContent = ex.verb.infinitive;
     subtitle.textContent = `${ex.pronoun}  (${PRONOUNS_RU[ex.pronoun]})  —  ${ex.verb.translation}`;
   } else {
-    label.textContent = 'Переведи на греческий';
+    label.textContent = 'Переведи на испанский';
     question.textContent = ex.russian;
     subtitle.textContent = `${ex.verb.infinitive}  —  ${ex.verb.translation}`;
   }
@@ -2029,7 +2029,7 @@ function buildPostContent(type, data) {
       const stars = data.isPerfect ? '⭐⭐⭐' : data.hearts >= 2 ? '⭐⭐' : '⭐';
       return {
         emoji: '📖',
-        title: 'Прошёл урок греческого',
+        title: 'Прошёл урок испанского',
         subtitle: `${stars} · ${data.correct}/${data.total} правильно`,
         chips: [
           { text: `+${data.xp} XP`, color: 'green' },
@@ -2041,7 +2041,7 @@ function buildPostContent(type, data) {
       const stars = data.pct === 1 ? '⭐⭐⭐' : data.pct >= 0.7 ? '⭐⭐' : '⭐';
       return {
         emoji: '🧩',
-        title: `Квиз: ${data.categoryTitle || 'Греческий'}`,
+        title: `Квиз: ${data.categoryTitle || 'Испанский'}`,
         subtitle: `${stars} · ${data.score}/${data.total} правильно`,
         chips: [
           { text: `+${data.xp} XP`, color: 'green' },
@@ -2429,8 +2429,8 @@ function showVocab(mode) {
   document.getElementById('vocab-screen-title').textContent = mode === 'image' ? 'Карточки' : 'Перевод';
   const descEl = document.getElementById('vocab-screen-desc');
   if (descEl) descEl.textContent = mode === 'image'
-    ? 'Выбери картинку, которая соответствует греческому слову.'
-    : 'Выбери правильный перевод греческого слова.';
+    ? 'Выбери картинку, которая соответствует испанскому слову.'
+    : 'Выбери правильный перевод испанского слова.';
 
   document.getElementById('vocab-categories-list').innerHTML =
     `<div class="vocab-categories-grid">${VOCAB_CATEGORIES.map(cat => {
@@ -2837,7 +2837,7 @@ function completeQuiz() {
   const cat = QUIZ_CATEGORIES.find(c => c.id === quizState.categoryId);
   createPost('quiz_complete', {
     score, total, pct, xp: xpEarned,
-    categoryTitle: cat?.title || 'Греческий'
+    categoryTitle: cat?.title || 'Испанский'
   });
 
   document.getElementById('quiz-complete-stars').textContent =
@@ -4483,7 +4483,7 @@ function renderListeningTrack() {
 </div>
 <div class="listen-play-area">
   <button class="listen-play-btn" id="listen-play-btn" onclick="playListeningTrack(${idx})">▶ Слушать</button>
-  <div class="listen-play-hint">Нажми — текст озвучится по-гречески</div>
+  <div class="listen-play-hint">Нажми — текст озвучится по-испански</div>
 </div>
 <div id="listen-transcript" class="listen-transcript" style="display:none">${t.text.replace(/\n/g,'<br>')}</div>
 <button class="listen-reveal-btn" id="listen-reveal-btn" onclick="toggleListeningTranscript()">👁 Показать текст</button>

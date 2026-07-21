@@ -35,7 +35,7 @@ self.addEventListener('push', event => {
   const data = event.data?.json() || {};
   const title = data.title || 'IziSpanish';
   const options = {
-    body: data.body || 'Время для греческого! 🇬🇷',
+    body: data.body || 'Время для испанского! 🇪🇸',
     icon: '/icon-192.png',
     badge: '/icon-72.png',
     vibrate: [200, 100, 200],
