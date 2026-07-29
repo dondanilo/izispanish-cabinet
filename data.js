@@ -3,127 +3,169 @@ const VERBS = [
     id: 1, infinitive: "ser", translation: "быть",
     transcription: "СЭР", note: "Неправильный глагол (постоянные признаки)",
     example: { greek: "Soy de Rusia — vivo aquí cinco años.", ru: "Я из России — живу здесь пять лет." },
-    present: { "yo": "soy", "tú": "eres", "él/ella/usted": "es", "nosotros": "somos", "vosotros": "sois", "ellos/ellas/ustedes": "son" }
+    present: { "yo": "soy", "tú": "eres", "él/ella/usted": "es", "nosotros": "somos", "vosotros": "sois", "ellos/ellas/ustedes": "son" },
+    preterite: { "yo": "fui", "tú": "fuiste", "él/ella/usted": "fue", "nosotros": "fuimos", "vosotros": "fuisteis", "ellos/ellas/ustedes": "fueron" },
+    future: { "yo": "seré", "tú": "serás", "él/ella/usted": "será", "nosotros": "seremos", "vosotros": "seréis", "ellos/ellas/ustedes": "serán" }
   },
   {
     id: 2, infinitive: "estar", translation: "быть / находиться",
     transcription: "ЭСТА́Р", note: "Неправильный глагол (временные состояния, местоположение)",
     example: { greek: "Estoy en Madrid — estoy muy contento.", ru: "Я в Мадриде — я очень доволен." },
-    present: { "yo": "estoy", "tú": "estás", "él/ella/usted": "está", "nosotros": "estamos", "vosotros": "estáis", "ellos/ellas/ustedes": "están" }
+    present: { "yo": "estoy", "tú": "estás", "él/ella/usted": "está", "nosotros": "estamos", "vosotros": "estáis", "ellos/ellas/ustedes": "están" },
+    preterite: { "yo": "estuve", "tú": "estuviste", "él/ella/usted": "estuvo", "nosotros": "estuvimos", "vosotros": "estuvisteis", "ellos/ellas/ustedes": "estuvieron" },
+    future: { "yo": "estaré", "tú": "estarás", "él/ella/usted": "estará", "nosotros": "estaremos", "vosotros": "estaréis", "ellos/ellas/ustedes": "estarán" }
   },
   {
     id: 3, infinitive: "tener", translation: "иметь",
     transcription: "ТЭНЭ́Р", note: "Неправильный глагол",
     example: { greek: "Tengo dos hijos y un perro.", ru: "У меня двое детей и одна собака." },
-    present: { "yo": "tengo", "tú": "tienes", "él/ella/usted": "tiene", "nosotros": "tenemos", "vosotros": "tenéis", "ellos/ellas/ustedes": "tienen" }
+    present: { "yo": "tengo", "tú": "tienes", "él/ella/usted": "tiene", "nosotros": "tenemos", "vosotros": "tenéis", "ellos/ellas/ustedes": "tienen" },
+    preterite: { "yo": "tuve", "tú": "tuviste", "él/ella/usted": "tuvo", "nosotros": "tuvimos", "vosotros": "tuvisteis", "ellos/ellas/ustedes": "tuvieron" },
+    future: { "yo": "tendré", "tú": "tendrás", "él/ella/usted": "tendrá", "nosotros": "tendremos", "vosotros": "tendréis", "ellos/ellas/ustedes": "tendrán" }
   },
   {
     id: 4, infinitive: "ir", translation: "идти / ехать",
     transcription: "ИР", note: "Неправильный глагол",
     example: { greek: "Voy a Barcelona en agosto.", ru: "Еду в Барселону в августе." },
-    present: { "yo": "voy", "tú": "vas", "él/ella/usted": "va", "nosotros": "vamos", "vosotros": "vais", "ellos/ellas/ustedes": "van" }
+    present: { "yo": "voy", "tú": "vas", "él/ella/usted": "va", "nosotros": "vamos", "vosotros": "vais", "ellos/ellas/ustedes": "van" },
+    preterite: { "yo": "fui", "tú": "fuiste", "él/ella/usted": "fue", "nosotros": "fuimos", "vosotros": "fuisteis", "ellos/ellas/ustedes": "fueron" },
+    future: { "yo": "iré", "tú": "irás", "él/ella/usted": "irá", "nosotros": "iremos", "vosotros": "iréis", "ellos/ellas/ustedes": "irán" }
   },
   {
     id: 5, infinitive: "hacer", translation: "делать",
     transcription: "АСЭ́Р", note: "Неправильный глагол (1 л. ед.ч. hago)",
     example: { greek: "¿Qué haces? — Trabajo desde casa.", ru: "Что делаешь? — Работаю из дома." },
-    present: { "yo": "hago", "tú": "haces", "él/ella/usted": "hace", "nosotros": "hacemos", "vosotros": "hacéis", "ellos/ellas/ustedes": "hacen" }
+    present: { "yo": "hago", "tú": "haces", "él/ella/usted": "hace", "nosotros": "hacemos", "vosotros": "hacéis", "ellos/ellas/ustedes": "hacen" },
+    preterite: { "yo": "hice", "tú": "hiciste", "él/ella/usted": "hizo", "nosotros": "hicimos", "vosotros": "hicisteis", "ellos/ellas/ustedes": "hicieron" },
+    future: { "yo": "haré", "tú": "harás", "él/ella/usted": "hará", "nosotros": "haremos", "vosotros": "haréis", "ellos/ellas/ustedes": "harán" }
   },
   {
     id: 6, infinitive: "poder", translation: "мочь",
     transcription: "ПОДЭ́Р", note: "Неправильный глагол (o→ue)",
     example: { greek: "¿Puedes ayudarme con el formulario?", ru: "Можешь помочь мне с бланком?" },
-    present: { "yo": "puedo", "tú": "puedes", "él/ella/usted": "puede", "nosotros": "podemos", "vosotros": "podéis", "ellos/ellas/ustedes": "pueden" }
+    present: { "yo": "puedo", "tú": "puedes", "él/ella/usted": "puede", "nosotros": "podemos", "vosotros": "podéis", "ellos/ellas/ustedes": "pueden" },
+    preterite: { "yo": "pude", "tú": "pudiste", "él/ella/usted": "pudo", "nosotros": "pudimos", "vosotros": "pudisteis", "ellos/ellas/ustedes": "pudieron" },
+    future: { "yo": "podré", "tú": "podrás", "él/ella/usted": "podrá", "nosotros": "podremos", "vosotros": "podréis", "ellos/ellas/ustedes": "podrán" }
   },
   {
     id: 7, infinitive: "querer", translation: "хотеть / любить",
     transcription: "КЭРЭ́Р", note: "Неправильный глагол (e→ie)",
     example: { greek: "Quiero abrir una cuenta bancaria.", ru: "Хочу открыть банковский счёт." },
-    present: { "yo": "quiero", "tú": "quieres", "él/ella/usted": "quiere", "nosotros": "queremos", "vosotros": "queréis", "ellos/ellas/ustedes": "quieren" }
+    present: { "yo": "quiero", "tú": "quieres", "él/ella/usted": "quiere", "nosotros": "queremos", "vosotros": "queréis", "ellos/ellas/ustedes": "quieren" },
+    preterite: { "yo": "quise", "tú": "quisiste", "él/ella/usted": "quiso", "nosotros": "quisimos", "vosotros": "quisisteis", "ellos/ellas/ustedes": "quisieron" },
+    future: { "yo": "querré", "tú": "querrás", "él/ella/usted": "querrá", "nosotros": "querremos", "vosotros": "querréis", "ellos/ellas/ustedes": "querrán" }
   },
   {
     id: 8, infinitive: "decir", translation: "говорить / сказать",
     transcription: "ДЭСИ́Р", note: "Неправильный глагол (1 л. ед.ч. digo)",
     example: { greek: "¿Cómo se dice 'contrato' en español?", ru: "Как по-испански 'контракт'?" },
-    present: { "yo": "digo", "tú": "dices", "él/ella/usted": "dice", "nosotros": "decimos", "vosotros": "decís", "ellos/ellas/ustedes": "dicen" }
+    present: { "yo": "digo", "tú": "dices", "él/ella/usted": "dice", "nosotros": "decimos", "vosotros": "decís", "ellos/ellas/ustedes": "dicen" },
+    preterite: { "yo": "dije", "tú": "dijiste", "él/ella/usted": "dijo", "nosotros": "dijimos", "vosotros": "dijisteis", "ellos/ellas/ustedes": "dijeron" },
+    future: { "yo": "diré", "tú": "dirás", "él/ella/usted": "dirá", "nosotros": "diremos", "vosotros": "diréis", "ellos/ellas/ustedes": "dirán" }
   },
   {
     id: 9, infinitive: "venir", translation: "приходить / приезжать",
     transcription: "ВЭНИ́Р", note: "Неправильный глагол (1 л. ед.ч. vengo)",
     example: { greek: "Vengo de Rusia, pero vivo en España.", ru: "Я приехал из России, но живу в Испании." },
-    present: { "yo": "vengo", "tú": "vienes", "él/ella/usted": "viene", "nosotros": "venimos", "vosotros": "venís", "ellos/ellas/ustedes": "vienen" }
+    present: { "yo": "vengo", "tú": "vienes", "él/ella/usted": "viene", "nosotros": "venimos", "vosotros": "venís", "ellos/ellas/ustedes": "vienen" },
+    preterite: { "yo": "vine", "tú": "viniste", "él/ella/usted": "vino", "nosotros": "vinimos", "vosotros": "vinisteis", "ellos/ellas/ustedes": "vinieron" },
+    future: { "yo": "vendré", "tú": "vendrás", "él/ella/usted": "vendrá", "nosotros": "vendremos", "vosotros": "vendréis", "ellos/ellas/ustedes": "vendrán" }
   },
   {
     id: 10, infinitive: "salir", translation: "выходить / уезжать",
     transcription: "САЛИ́Р", note: "Неправильный глагол (1 л. ед.ч. salgo)",
     example: { greek: "Salgo de casa a las ocho de la mañana.", ru: "Я выхожу из дома в восемь утра." },
-    present: { "yo": "salgo", "tú": "sales", "él/ella/usted": "sale", "nosotros": "salimos", "vosotros": "salís", "ellos/ellas/ustedes": "salen" }
+    present: { "yo": "salgo", "tú": "sales", "él/ella/usted": "sale", "nosotros": "salimos", "vosotros": "salís", "ellos/ellas/ustedes": "salen" },
+    preterite: { "yo": "salí", "tú": "saliste", "él/ella/usted": "salió", "nosotros": "salimos", "vosotros": "salisteis", "ellos/ellas/ustedes": "salieron" },
+    future: { "yo": "saldré", "tú": "saldrás", "él/ella/usted": "saldrá", "nosotros": "saldremos", "vosotros": "saldréis", "ellos/ellas/ustedes": "saldrán" }
   },
   {
     id: 11, infinitive: "poner", translation: "класть / ставить",
     transcription: "ПОНЭ́Р", note: "Неправильный глагол (1 л. ед.ч. pongo)",
     example: { greek: "Pongo los documentos en la carpeta.", ru: "Кладу документы в папку." },
-    present: { "yo": "pongo", "tú": "pones", "él/ella/usted": "pone", "nosotros": "ponemos", "vosotros": "ponéis", "ellos/ellas/ustedes": "ponen" }
+    present: { "yo": "pongo", "tú": "pones", "él/ella/usted": "pone", "nosotros": "ponemos", "vosotros": "ponéis", "ellos/ellas/ustedes": "ponen" },
+    preterite: { "yo": "puse", "tú": "pusiste", "él/ella/usted": "puso", "nosotros": "pusimos", "vosotros": "pusisteis", "ellos/ellas/ustedes": "pusieron" },
+    future: { "yo": "pondré", "tú": "pondrás", "él/ella/usted": "pondrá", "nosotros": "pondremos", "vosotros": "pondréis", "ellos/ellas/ustedes": "pondrán" }
   },
   {
     id: 12, infinitive: "saber", translation: "знать",
     transcription: "САБЭ́Р", note: "Неправильный глагол (1 л. ед.ч. sé)",
     example: { greek: "Sé un poco de español — nivel A2.", ru: "Знаю немного испанский — уровень A2." },
-    present: { "yo": "sé", "tú": "sabes", "él/ella/usted": "sabe", "nosotros": "sabemos", "vosotros": "sabéis", "ellos/ellas/ustedes": "saben" }
+    present: { "yo": "sé", "tú": "sabes", "él/ella/usted": "sabe", "nosotros": "sabemos", "vosotros": "sabéis", "ellos/ellas/ustedes": "saben" },
+    preterite: { "yo": "supe", "tú": "supiste", "él/ella/usted": "supo", "nosotros": "supimos", "vosotros": "supisteis", "ellos/ellas/ustedes": "supieron" },
+    future: { "yo": "sabré", "tú": "sabrás", "él/ella/usted": "sabrá", "nosotros": "sabremos", "vosotros": "sabréis", "ellos/ellas/ustedes": "sabrán" }
   },
   {
     id: 13, infinitive: "ver", translation: "видеть / смотреть",
     transcription: "ВЭР", note: "Неправильный глагол (1 л. ед.ч. veo)",
     example: { greek: "Veo películas españolas para aprender el idioma.", ru: "Смотрю испанские фильмы, чтобы учить язык." },
-    present: { "yo": "veo", "tú": "ves", "él/ella/usted": "ve", "nosotros": "vemos", "vosotros": "veis", "ellos/ellas/ustedes": "ven" }
+    present: { "yo": "veo", "tú": "ves", "él/ella/usted": "ve", "nosotros": "vemos", "vosotros": "veis", "ellos/ellas/ustedes": "ven" },
+    preterite: { "yo": "vi", "tú": "viste", "él/ella/usted": "vio", "nosotros": "vimos", "vosotros": "visteis", "ellos/ellas/ustedes": "vieron" },
+    future: { "yo": "veré", "tú": "verás", "él/ella/usted": "verá", "nosotros": "veremos", "vosotros": "veréis", "ellos/ellas/ustedes": "verán" }
   },
   {
     id: 14, infinitive: "dar", translation: "давать",
     transcription: "ДАР", note: "Неправильный глагол (1 л. ед.ч. doy)",
     example: { greek: "¿Me puede dar un recibo, por favor?", ru: "Можете дать мне чек, пожалуйста?" },
-    present: { "yo": "doy", "tú": "das", "él/ella/usted": "da", "nosotros": "damos", "vosotros": "dais", "ellos/ellas/ustedes": "dan" }
+    present: { "yo": "doy", "tú": "das", "él/ella/usted": "da", "nosotros": "damos", "vosotros": "dais", "ellos/ellas/ustedes": "dan" },
+    preterite: { "yo": "di", "tú": "diste", "él/ella/usted": "dio", "nosotros": "dimos", "vosotros": "disteis", "ellos/ellas/ustedes": "dieron" },
+    future: { "yo": "daré", "tú": "darás", "él/ella/usted": "dará", "nosotros": "daremos", "vosotros": "daréis", "ellos/ellas/ustedes": "darán" }
   },
   {
     id: 15, infinitive: "haber", translation: "иметься / быть (вспомогательный)",
     transcription: "АБЭ́Р", note: "Неправильный глагол; hay = 'есть/имеется'",
     example: { greek: "Hay una farmacia cerca de aquí.", ru: "Здесь рядом есть аптека." },
-    present: { "yo": "he", "tú": "has", "él/ella/usted": "ha (hay)", "nosotros": "hemos", "vosotros": "habéis", "ellos/ellas/ustedes": "han" }
+    present: { "yo": "he", "tú": "has", "él/ella/usted": "ha (hay)", "nosotros": "hemos", "vosotros": "habéis", "ellos/ellas/ustedes": "han" },
+    preterite: { "yo": "hube", "tú": "hubiste", "él/ella/usted": "hubo", "nosotros": "hubimos", "vosotros": "hubisteis", "ellos/ellas/ustedes": "hubieron" },
+    future: { "yo": "habré", "tú": "habrás", "él/ella/usted": "habrá", "nosotros": "habremos", "vosotros": "habréis", "ellos/ellas/ustedes": "habrán" }
   },
   {
     id: 16, infinitive: "hablar", translation: "говорить / разговаривать",
     transcription: "АБЛА́Р", note: "Правильный -ar глагол",
     example: { greek: "Hablo un poco de español — todavía aprendo.", ru: "Говорю немного по-испански — ещё учусь." },
-    present: { "yo": "hablo", "tú": "hablas", "él/ella/usted": "habla", "nosotros": "hablamos", "vosotros": "habláis", "ellos/ellas/ustedes": "hablan" }
+    present: { "yo": "hablo", "tú": "hablas", "él/ella/usted": "habla", "nosotros": "hablamos", "vosotros": "habláis", "ellos/ellas/ustedes": "hablan" },
+    preterite: { "yo": "hablé", "tú": "hablaste", "él/ella/usted": "habló", "nosotros": "hablamos", "vosotros": "hablasteis", "ellos/ellas/ustedes": "hablaron" },
+    future: { "yo": "hablaré", "tú": "hablarás", "él/ella/usted": "hablará", "nosotros": "hablaremos", "vosotros": "hablaréis", "ellos/ellas/ustedes": "hablarán" }
   },
   {
     id: 17, infinitive: "comer", translation: "есть / кушать",
     transcription: "КОМЭ́Р", note: "Правильный -er глагол",
     example: { greek: "Como paella y bebo sangría en Valencia.", ru: "Ем паэлью и пью сангрию в Валенсии." },
-    present: { "yo": "como", "tú": "comes", "él/ella/usted": "come", "nosotros": "comemos", "vosotros": "coméis", "ellos/ellas/ustedes": "comen" }
+    present: { "yo": "como", "tú": "comes", "él/ella/usted": "come", "nosotros": "comemos", "vosotros": "coméis", "ellos/ellas/ustedes": "comen" },
+    preterite: { "yo": "comí", "tú": "comiste", "él/ella/usted": "comió", "nosotros": "comimos", "vosotros": "comisteis", "ellos/ellas/ustedes": "comieron" },
+    future: { "yo": "comeré", "tú": "comerás", "él/ella/usted": "comerá", "nosotros": "comeremos", "vosotros": "comeréis", "ellos/ellas/ustedes": "comerán" }
   },
   {
     id: 18, infinitive: "vivir", translation: "жить",
     transcription: "ВИВИ́Р", note: "Правильный -ir глагол",
     example: { greek: "Vivo en Málaga — es una ciudad preciosa.", ru: "Живу в Малаге — это прекрасный город." },
-    present: { "yo": "vivo", "tú": "vives", "él/ella/usted": "vive", "nosotros": "vivimos", "vosotros": "vivís", "ellos/ellas/ustedes": "viven" }
+    present: { "yo": "vivo", "tú": "vives", "él/ella/usted": "vive", "nosotros": "vivimos", "vosotros": "vivís", "ellos/ellas/ustedes": "viven" },
+    preterite: { "yo": "viví", "tú": "viviste", "él/ella/usted": "vivió", "nosotros": "vivimos", "vosotros": "vivisteis", "ellos/ellas/ustedes": "vivieron" },
+    future: { "yo": "viviré", "tú": "vivirás", "él/ella/usted": "vivirá", "nosotros": "viviremos", "vosotros": "viviréis", "ellos/ellas/ustedes": "vivirán" }
   },
   {
     id: 19, infinitive: "trabajar", translation: "работать",
     transcription: "ТРАБАХА́Р", note: "Правильный -ar глагол",
     example: { greek: "Trabajo todos los días de nueve a seis.", ru: "Работаю каждый день с девяти до шести." },
-    present: { "yo": "trabajo", "tú": "trabajas", "él/ella/usted": "trabaja", "nosotros": "trabajamos", "vosotros": "trabajáis", "ellos/ellas/ustedes": "trabajan" }
+    present: { "yo": "trabajo", "tú": "trabajas", "él/ella/usted": "trabaja", "nosotros": "trabajamos", "vosotros": "trabajáis", "ellos/ellas/ustedes": "trabajan" },
+    preterite: { "yo": "trabajé", "tú": "trabajaste", "él/ella/usted": "trabajó", "nosotros": "trabajamos", "vosotros": "trabajasteis", "ellos/ellas/ustedes": "trabajaron" },
+    future: { "yo": "trabajaré", "tú": "trabajarás", "él/ella/usted": "trabajará", "nosotros": "trabajaremos", "vosotros": "trabajaréis", "ellos/ellas/ustedes": "trabajarán" }
   },
   {
     id: 20, infinitive: "comprar", translation: "покупать",
     transcription: "КОМПРА́Р", note: "Правильный -ar глагол",
     example: { greek: "Quiero comprar un billete de tren a Sevilla.", ru: "Хочу купить билет на поезд до Севильи." },
-    present: { "yo": "compro", "tú": "compras", "él/ella/usted": "compra", "nosotros": "compramos", "vosotros": "compráis", "ellos/ellas/ustedes": "compran" }
+    present: { "yo": "compro", "tú": "compras", "él/ella/usted": "compra", "nosotros": "compramos", "vosotros": "compráis", "ellos/ellas/ustedes": "compran" },
+    preterite: { "yo": "compré", "tú": "compraste", "él/ella/usted": "compró", "nosotros": "compramos", "vosotros": "comprasteis", "ellos/ellas/ustedes": "compraron" },
+    future: { "yo": "compraré", "tú": "comprarás", "él/ella/usted": "comprará", "nosotros": "compraremos", "vosotros": "compraréis", "ellos/ellas/ustedes": "comprarán" }
   },
   {
     id: 21, infinitive: "necesitar", translation: "нуждаться / быть нужным",
     transcription: "НЭСЭСИТА́Р", note: "Правильный -ar глагол",
     example: { greek: "Necesito el DNI y el número de teléfono.", ru: "Мне нужны удостоверение личности и номер телефона." },
-    present: { "yo": "necesito", "tú": "necesitas", "él/ella/usted": "necesita", "nosotros": "necesitamos", "vosotros": "necesitáis", "ellos/ellas/ustedes": "necesitan" }
+    present: { "yo": "necesito", "tú": "necesitas", "él/ella/usted": "necesita", "nosotros": "necesitamos", "vosotros": "necesitáis", "ellos/ellas/ustedes": "necesitan" },
+    preterite: { "yo": "necesité", "tú": "necesitaste", "él/ella/usted": "necesitó", "nosotros": "necesitamos", "vosotros": "necesitasteis", "ellos/ellas/ustedes": "necesitaron" },
+    future: { "yo": "necesitaré", "tú": "necesitarás", "él/ella/usted": "necesitará", "nosotros": "necesitaremos", "vosotros": "necesitaréis", "ellos/ellas/ustedes": "necesitarán" }
   },
   {
     id: 22, infinitive: "gustar", translation: "нравиться",
@@ -135,139 +177,185 @@ const VERBS = [
     id: 23, infinitive: "llamar", translation: "звать / звонить",
     transcription: "ЯМА́Р", note: "Правильный -ar глагол (llamarse — зваться)",
     example: { greek: "Me llamo Ana y llamo a mi familia cada semana.", ru: "Меня зовут Анна, и я звоню семье каждую неделю." },
-    present: { "yo": "llamo", "tú": "llamas", "él/ella/usted": "llama", "nosotros": "llamamos", "vosotros": "llamáis", "ellos/ellas/ustedes": "llaman" }
+    present: { "yo": "llamo", "tú": "llamas", "él/ella/usted": "llama", "nosotros": "llamamos", "vosotros": "llamáis", "ellos/ellas/ustedes": "llaman" },
+    preterite: { "yo": "llamé", "tú": "llamaste", "él/ella/usted": "llamó", "nosotros": "llamamos", "vosotros": "llamasteis", "ellos/ellas/ustedes": "llamaron" },
+    future: { "yo": "llamaré", "tú": "llamarás", "él/ella/usted": "llamará", "nosotros": "llamaremos", "vosotros": "llamaréis", "ellos/ellas/ustedes": "llamarán" }
   },
   {
     id: 24, infinitive: "estudiar", translation: "изучать / учиться",
     transcription: "ЭСТУДЬА́Р", note: "Правильный -ar глагол",
     example: { greek: "Estudio español todos los días media hora.", ru: "Изучаю испанский каждый день по полчаса." },
-    present: { "yo": "estudio", "tú": "estudias", "él/ella/usted": "estudia", "nosotros": "estudiamos", "vosotros": "estudiáis", "ellos/ellas/ustedes": "estudian" }
+    present: { "yo": "estudio", "tú": "estudias", "él/ella/usted": "estudia", "nosotros": "estudiamos", "vosotros": "estudiáis", "ellos/ellas/ustedes": "estudian" },
+    preterite: { "yo": "estudié", "tú": "estudiaste", "él/ella/usted": "estudió", "nosotros": "estudiamos", "vosotros": "estudiasteis", "ellos/ellas/ustedes": "estudiaron" },
+    future: { "yo": "estudiaré", "tú": "estudiarás", "él/ella/usted": "estudiará", "nosotros": "estudiaremos", "vosotros": "estudiaréis", "ellos/ellas/ustedes": "estudiarán" }
   },
   {
     id: 25, infinitive: "ayudar", translation: "помогать",
     transcription: "АЮДА́Р", note: "Правильный -ar глагол",
     example: { greek: "¿Me puede ayudar con este formulario?", ru: "Можете помочь мне с этим бланком?" },
-    present: { "yo": "ayudo", "tú": "ayudas", "él/ella/usted": "ayuda", "nosotros": "ayudamos", "vosotros": "ayudáis", "ellos/ellas/ustedes": "ayudan" }
+    present: { "yo": "ayudo", "tú": "ayudas", "él/ella/usted": "ayuda", "nosotros": "ayudamos", "vosotros": "ayudáis", "ellos/ellas/ustedes": "ayudan" },
+    preterite: { "yo": "ayudé", "tú": "ayudaste", "él/ella/usted": "ayudó", "nosotros": "ayudamos", "vosotros": "ayudasteis", "ellos/ellas/ustedes": "ayudaron" },
+    future: { "yo": "ayudaré", "tú": "ayudarás", "él/ella/usted": "ayudará", "nosotros": "ayudaremos", "vosotros": "ayudaréis", "ellos/ellas/ustedes": "ayudarán" }
   },
   {
     id: 26, infinitive: "escuchar", translation: "слушать",
     transcription: "ЭСКУЧА́Р", note: "Правильный -ar глагол",
     example: { greek: "Escucho música española en el coche.", ru: "Слушаю испанскую музыку в машине." },
-    present: { "yo": "escucho", "tú": "escuchas", "él/ella/usted": "escucha", "nosotros": "escuchamos", "vosotros": "escucháis", "ellos/ellas/ustedes": "escuchan" }
+    present: { "yo": "escucho", "tú": "escuchas", "él/ella/usted": "escucha", "nosotros": "escuchamos", "vosotros": "escucháis", "ellos/ellas/ustedes": "escuchan" },
+    preterite: { "yo": "escuché", "tú": "escuchaste", "él/ella/usted": "escuchó", "nosotros": "escuchamos", "vosotros": "escuchasteis", "ellos/ellas/ustedes": "escucharon" },
+    future: { "yo": "escucharé", "tú": "escucharás", "él/ella/usted": "escuchará", "nosotros": "escucharemos", "vosotros": "escucharéis", "ellos/ellas/ustedes": "escucharán" }
   },
   {
     id: 27, infinitive: "mirar", translation: "смотреть",
     transcription: "МИРА́Р", note: "Правильный -ar глагол",
     example: { greek: "Miro el mapa para encontrar la farmacia.", ru: "Смотрю на карту, чтобы найти аптеку." },
-    present: { "yo": "miro", "tú": "miras", "él/ella/usted": "mira", "nosotros": "miramos", "vosotros": "miráis", "ellos/ellas/ustedes": "miran" }
+    present: { "yo": "miro", "tú": "miras", "él/ella/usted": "mira", "nosotros": "miramos", "vosotros": "miráis", "ellos/ellas/ustedes": "miran" },
+    preterite: { "yo": "miré", "tú": "miraste", "él/ella/usted": "miró", "nosotros": "miramos", "vosotros": "mirasteis", "ellos/ellas/ustedes": "miraron" },
+    future: { "yo": "miraré", "tú": "mirarás", "él/ella/usted": "mirará", "nosotros": "miraremos", "vosotros": "miraréis", "ellos/ellas/ustedes": "mirarán" }
   },
   {
     id: 28, infinitive: "comprender", translation: "понимать",
     transcription: "КОМПРЭНДЭ́Р", note: "Правильный -er глагол (синоним entender)",
     example: { greek: "No comprendo bien, ¿puede repetir?", ru: "Я не очень понимаю, можете повторить?" },
-    present: { "yo": "comprendo", "tú": "comprendes", "él/ella/usted": "comprende", "nosotros": "comprendemos", "vosotros": "comprendéis", "ellos/ellas/ustedes": "comprenden" }
+    present: { "yo": "comprendo", "tú": "comprendes", "él/ella/usted": "comprende", "nosotros": "comprendemos", "vosotros": "comprendéis", "ellos/ellas/ustedes": "comprenden" },
+    preterite: { "yo": "comprendí", "tú": "comprendiste", "él/ella/usted": "comprendió", "nosotros": "comprendimos", "vosotros": "comprendisteis", "ellos/ellas/ustedes": "comprendieron" },
+    future: { "yo": "comprenderé", "tú": "comprenderás", "él/ella/usted": "comprenderá", "nosotros": "comprenderemos", "vosotros": "comprenderéis", "ellos/ellas/ustedes": "comprenderán" }
   },
   {
     id: 29, infinitive: "abrir", translation: "открывать",
     transcription: "АБРИ́Р", note: "Правильный -ir глагол",
     example: { greek: "El banco abre a las nueve de la mañana.", ru: "Банк открывается в девять утра." },
-    present: { "yo": "abro", "tú": "abres", "él/ella/usted": "abre", "nosotros": "abrimos", "vosotros": "abrís", "ellos/ellas/ustedes": "abren" }
+    present: { "yo": "abro", "tú": "abres", "él/ella/usted": "abre", "nosotros": "abrimos", "vosotros": "abrís", "ellos/ellas/ustedes": "abren" },
+    preterite: { "yo": "abrí", "tú": "abriste", "él/ella/usted": "abrió", "nosotros": "abrimos", "vosotros": "abristeis", "ellos/ellas/ustedes": "abrieron" },
+    future: { "yo": "abriré", "tú": "abrirás", "él/ella/usted": "abrirá", "nosotros": "abriremos", "vosotros": "abriréis", "ellos/ellas/ustedes": "abrirán" }
   },
   {
     id: 30, infinitive: "escribir", translation: "писать",
     transcription: "ЭСКРИБИ́Р", note: "Правильный -ir глагол",
     example: { greek: "Escribo mi dirección en el formulario.", ru: "Пишу свой адрес в бланке." },
-    present: { "yo": "escribo", "tú": "escribes", "él/ella/usted": "escribe", "nosotros": "escribimos", "vosotros": "escribís", "ellos/ellas/ustedes": "escriben" }
+    present: { "yo": "escribo", "tú": "escribes", "él/ella/usted": "escribe", "nosotros": "escribimos", "vosotros": "escribís", "ellos/ellas/ustedes": "escriben" },
+    preterite: { "yo": "escribí", "tú": "escribiste", "él/ella/usted": "escribió", "nosotros": "escribimos", "vosotros": "escribisteis", "ellos/ellas/ustedes": "escribieron" },
+    future: { "yo": "escribiré", "tú": "escribirás", "él/ella/usted": "escribirá", "nosotros": "escribiremos", "vosotros": "escribiréis", "ellos/ellas/ustedes": "escribirán" }
   },
   {
     id: 31, infinitive: "leer", translation: "читать",
     transcription: "ЛЭЭ́Р", note: "Правильный -er глагол",
     example: { greek: "Leo el contrato antes de firmarlo.", ru: "Читаю договор перед тем как его подписать." },
-    present: { "yo": "leo", "tú": "lees", "él/ella/usted": "lee", "nosotros": "leemos", "vosotros": "leéis", "ellos/ellas/ustedes": "leen" }
+    present: { "yo": "leo", "tú": "lees", "él/ella/usted": "lee", "nosotros": "leemos", "vosotros": "leéis", "ellos/ellas/ustedes": "leen" },
+    preterite: { "yo": "leí", "tú": "leíste", "él/ella/usted": "leyó", "nosotros": "leímos", "vosotros": "leísteis", "ellos/ellas/ustedes": "leyeron" },
+    future: { "yo": "leeré", "tú": "leerás", "él/ella/usted": "leerá", "nosotros": "leeremos", "vosotros": "leeréis", "ellos/ellas/ustedes": "leerán" }
   },
   {
     id: 32, infinitive: "beber", translation: "пить",
     transcription: "БЭБЭ́Р", note: "Правильный -er глагол",
     example: { greek: "Bebo café por la mañana y agua todo el día.", ru: "Пью кофе утром и воду весь день." },
-    present: { "yo": "bebo", "tú": "bebes", "él/ella/usted": "bebe", "nosotros": "bebemos", "vosotros": "bebéis", "ellos/ellas/ustedes": "beben" }
+    present: { "yo": "bebo", "tú": "bebes", "él/ella/usted": "bebe", "nosotros": "bebemos", "vosotros": "bebéis", "ellos/ellas/ustedes": "beben" },
+    preterite: { "yo": "bebí", "tú": "bebiste", "él/ella/usted": "bebió", "nosotros": "bebimos", "vosotros": "bebisteis", "ellos/ellas/ustedes": "bebieron" },
+    future: { "yo": "beberé", "tú": "beberás", "él/ella/usted": "beberá", "nosotros": "beberemos", "vosotros": "beberéis", "ellos/ellas/ustedes": "beberán" }
   },
   {
     id: 33, infinitive: "empezar", translation: "начинать",
     transcription: "ЭМПЭСА́Р", note: "Неправильный глагол (e→ie)",
     example: { greek: "Empiezo a trabajar el lunes que viene.", ru: "Начинаю работать в следующий понедельник." },
-    present: { "yo": "empiezo", "tú": "empiezas", "él/ella/usted": "empieza", "nosotros": "empezamos", "vosotros": "empezáis", "ellos/ellas/ustedes": "empiezan" }
+    present: { "yo": "empiezo", "tú": "empiezas", "él/ella/usted": "empieza", "nosotros": "empezamos", "vosotros": "empezáis", "ellos/ellas/ustedes": "empiezan" },
+    preterite: { "yo": "empecé", "tú": "empezaste", "él/ella/usted": "empezó", "nosotros": "empezamos", "vosotros": "empezasteis", "ellos/ellas/ustedes": "empezaron" },
+    future: { "yo": "empezaré", "tú": "empezarás", "él/ella/usted": "empezará", "nosotros": "empezaremos", "vosotros": "empezaréis", "ellos/ellas/ustedes": "empezarán" }
   },
   {
     id: 34, infinitive: "terminar", translation: "заканчивать",
     transcription: "ТЭРМИНА́Р", note: "Правильный -ar глагол",
     example: { greek: "Termino de trabajar a las seis de la tarde.", ru: "Заканчиваю работать в шесть вечера." },
-    present: { "yo": "termino", "tú": "terminas", "él/ella/usted": "termina", "nosotros": "terminamos", "vosotros": "termináis", "ellos/ellas/ustedes": "terminan" }
+    present: { "yo": "termino", "tú": "terminas", "él/ella/usted": "termina", "nosotros": "terminamos", "vosotros": "termináis", "ellos/ellas/ustedes": "terminan" },
+    preterite: { "yo": "terminé", "tú": "terminaste", "él/ella/usted": "terminó", "nosotros": "terminamos", "vosotros": "terminasteis", "ellos/ellas/ustedes": "terminaron" },
+    future: { "yo": "terminaré", "tú": "terminarás", "él/ella/usted": "terminará", "nosotros": "terminaremos", "vosotros": "terminaréis", "ellos/ellas/ustedes": "terminarán" }
   },
   {
     id: 35, infinitive: "enviar", translation: "отправлять",
     transcription: "ЭНВЬА́Р", note: "Правильный -ar глагол (é в ударных формах)",
     example: { greek: "Envío el documento por correo electrónico.", ru: "Отправляю документ по электронной почте." },
-    present: { "yo": "envío", "tú": "envías", "él/ella/usted": "envía", "nosotros": "enviamos", "vosotros": "enviáis", "ellos/ellas/ustedes": "envían" }
+    present: { "yo": "envío", "tú": "envías", "él/ella/usted": "envía", "nosotros": "enviamos", "vosotros": "enviáis", "ellos/ellas/ustedes": "envían" },
+    preterite: { "yo": "envié", "tú": "enviaste", "él/ella/usted": "envió", "nosotros": "enviamos", "vosotros": "enviasteis", "ellos/ellas/ustedes": "enviaron" },
+    future: { "yo": "enviaré", "tú": "enviarás", "él/ella/usted": "enviará", "nosotros": "enviaremos", "vosotros": "enviaréis", "ellos/ellas/ustedes": "enviarán" }
   },
   {
     id: 36, infinitive: "preguntar", translation: "спрашивать",
     transcription: "ПРЭГУНТА́Р", note: "Правильный -ar глагол",
     example: { greek: "Pregunto al empleado dónde está la cola.", ru: "Спрашиваю у сотрудника, где очередь." },
-    present: { "yo": "pregunto", "tú": "preguntas", "él/ella/usted": "pregunta", "nosotros": "preguntamos", "vosotros": "preguntáis", "ellos/ellas/ustedes": "preguntan" }
+    present: { "yo": "pregunto", "tú": "preguntas", "él/ella/usted": "pregunta", "nosotros": "preguntamos", "vosotros": "preguntáis", "ellos/ellas/ustedes": "preguntan" },
+    preterite: { "yo": "pregunté", "tú": "preguntaste", "él/ella/usted": "preguntó", "nosotros": "preguntamos", "vosotros": "preguntasteis", "ellos/ellas/ustedes": "preguntaron" },
+    future: { "yo": "preguntaré", "tú": "preguntarás", "él/ella/usted": "preguntará", "nosotros": "preguntaremos", "vosotros": "preguntaréis", "ellos/ellas/ustedes": "preguntarán" }
   },
   {
     id: 37, infinitive: "responder", translation: "отвечать",
     transcription: "РЭСПОНДЭ́Р", note: "Правильный -er глагол",
     example: { greek: "Respondo a todos los correos importantes.", ru: "Отвечаю на все важные письма." },
-    present: { "yo": "respondo", "tú": "respondes", "él/ella/usted": "responde", "nosotros": "respondemos", "vosotros": "respondéis", "ellos/ellas/ustedes": "responden" }
+    present: { "yo": "respondo", "tú": "respondes", "él/ella/usted": "responde", "nosotros": "respondemos", "vosotros": "respondéis", "ellos/ellas/ustedes": "responden" },
+    preterite: { "yo": "respondí", "tú": "respondiste", "él/ella/usted": "respondió", "nosotros": "respondimos", "vosotros": "respondisteis", "ellos/ellas/ustedes": "respondieron" },
+    future: { "yo": "responderé", "tú": "responderás", "él/ella/usted": "responderá", "nosotros": "responderemos", "vosotros": "responderéis", "ellos/ellas/ustedes": "responderán" }
   },
   {
     id: 38, infinitive: "mostrar", translation: "показывать",
     transcription: "МОСТРА́Р", note: "Неправильный глагол (o→ue)",
     example: { greek: "Le muestro mi pasaporte al policía.", ru: "Показываю паспорт полицейскому." },
-    present: { "yo": "muestro", "tú": "muestras", "él/ella/usted": "muestra", "nosotros": "mostramos", "vosotros": "mostráis", "ellos/ellas/ustedes": "muestran" }
+    present: { "yo": "muestro", "tú": "muestras", "él/ella/usted": "muestra", "nosotros": "mostramos", "vosotros": "mostráis", "ellos/ellas/ustedes": "muestran" },
+    preterite: { "yo": "mostré", "tú": "mostraste", "él/ella/usted": "mostró", "nosotros": "mostramos", "vosotros": "mostrasteis", "ellos/ellas/ustedes": "mostraron" },
+    future: { "yo": "mostraré", "tú": "mostrarás", "él/ella/usted": "mostrará", "nosotros": "mostraremos", "vosotros": "mostraréis", "ellos/ellas/ustedes": "mostrarán" }
   },
   {
     id: 39, infinitive: "pagar", translation: "платить",
     transcription: "ПАГА́Р", note: "Правильный -ar глагол",
     example: { greek: "Pago el alquiler el día uno de cada mes.", ru: "Я плачу аренду первого числа каждого месяца." },
-    present: { "yo": "pago", "tú": "pagas", "él/ella/usted": "paga", "nosotros": "pagamos", "vosotros": "pagáis", "ellos/ellas/ustedes": "pagan" }
+    present: { "yo": "pago", "tú": "pagas", "él/ella/usted": "paga", "nosotros": "pagamos", "vosotros": "pagáis", "ellos/ellas/ustedes": "pagan" },
+    preterite: { "yo": "pagué", "tú": "pagaste", "él/ella/usted": "pagó", "nosotros": "pagamos", "vosotros": "pagasteis", "ellos/ellas/ustedes": "pagaron" },
+    future: { "yo": "pagaré", "tú": "pagarás", "él/ella/usted": "pagará", "nosotros": "pagaremos", "vosotros": "pagaréis", "ellos/ellas/ustedes": "pagarán" }
   },
   {
     id: 40, infinitive: "buscar", translation: "искать",
     transcription: "БУСКА́Р", note: "Правильный -ar глагол",
     example: { greek: "Busco piso de alquiler cerca del centro.", ru: "Ищу квартиру в аренду возле центра." },
-    present: { "yo": "busco", "tú": "buscas", "él/ella/usted": "busca", "nosotros": "buscamos", "vosotros": "buscáis", "ellos/ellas/ustedes": "buscan" }
+    present: { "yo": "busco", "tú": "buscas", "él/ella/usted": "busca", "nosotros": "buscamos", "vosotros": "buscáis", "ellos/ellas/ustedes": "buscan" },
+    preterite: { "yo": "busqué", "tú": "buscaste", "él/ella/usted": "buscó", "nosotros": "buscamos", "vosotros": "buscasteis", "ellos/ellas/ustedes": "buscaron" },
+    future: { "yo": "buscaré", "tú": "buscarás", "él/ella/usted": "buscará", "nosotros": "buscaremos", "vosotros": "buscaréis", "ellos/ellas/ustedes": "buscarán" }
   },
   {
     id: 41, infinitive: "encontrar", translation: "находить",
     transcription: "ЭНКОНТРА́Р", note: "Неправильный глагол (o→ue)",
     example: { greek: "Encuentro trabajo gracias a un amigo.", ru: "Нахожу работу благодаря другу." },
-    present: { "yo": "encuentro", "tú": "encuentras", "él/ella/usted": "encuentra", "nosotros": "encontramos", "vosotros": "encontráis", "ellos/ellas/ustedes": "encuentran" }
+    present: { "yo": "encuentro", "tú": "encuentras", "él/ella/usted": "encuentra", "nosotros": "encontramos", "vosotros": "encontráis", "ellos/ellas/ustedes": "encuentran" },
+    preterite: { "yo": "encontré", "tú": "encontraste", "él/ella/usted": "encontró", "nosotros": "encontramos", "vosotros": "encontrasteis", "ellos/ellas/ustedes": "encontraron" },
+    future: { "yo": "encontraré", "tú": "encontrarás", "él/ella/usted": "encontrará", "nosotros": "encontraremos", "vosotros": "encontraréis", "ellos/ellas/ustedes": "encontrarán" }
   },
   {
     id: 42, infinitive: "llegar", translation: "приходить / прибывать",
     transcription: "ЕГА́Р", note: "Правильный -ar глагол",
     example: { greek: "Llego a la oficina a las nueve en punto.", ru: "Прихожу в офис ровно в девять." },
-    present: { "yo": "llego", "tú": "llegas", "él/ella/usted": "llega", "nosotros": "llegamos", "vosotros": "llegáis", "ellos/ellas/ustedes": "llegan" }
+    present: { "yo": "llego", "tú": "llegas", "él/ella/usted": "llega", "nosotros": "llegamos", "vosotros": "llegáis", "ellos/ellas/ustedes": "llegan" },
+    preterite: { "yo": "llegué", "tú": "llegaste", "él/ella/usted": "llegó", "nosotros": "llegamos", "vosotros": "llegasteis", "ellos/ellas/ustedes": "llegaron" },
+    future: { "yo": "llegaré", "tú": "llegarás", "él/ella/usted": "llegará", "nosotros": "llegaremos", "vosotros": "llegaréis", "ellos/ellas/ustedes": "llegarán" }
   },
   {
     id: 43, infinitive: "esperar", translation: "ждать / надеяться",
     transcription: "ЭСПЭРА́Р", note: "Правильный -ar глагол",
     example: { greek: "Espero el autobús en la parada.", ru: "Жду автобус на остановке." },
-    present: { "yo": "espero", "tú": "esperas", "él/ella/usted": "espera", "nosotros": "esperamos", "vosotros": "esperáis", "ellos/ellas/ustedes": "esperan" }
+    present: { "yo": "espero", "tú": "esperas", "él/ella/usted": "espera", "nosotros": "esperamos", "vosotros": "esperáis", "ellos/ellas/ustedes": "esperan" },
+    preterite: { "yo": "esperé", "tú": "esperaste", "él/ella/usted": "esperó", "nosotros": "esperamos", "vosotros": "esperasteis", "ellos/ellas/ustedes": "esperaron" },
+    future: { "yo": "esperaré", "tú": "esperarás", "él/ella/usted": "esperará", "nosotros": "esperaremos", "vosotros": "esperaréis", "ellos/ellas/ustedes": "esperarán" }
   },
   {
     id: 44, infinitive: "pensar", translation: "думать",
     transcription: "ПЭНСА́Р", note: "Неправильный глагол (e→ie)",
     example: { greek: "Pienso mudarme a Valencia el año que viene.", ru: "Думаю переехать в Валенсию в следующем году." },
-    present: { "yo": "pienso", "tú": "piensas", "él/ella/usted": "piensa", "nosotros": "pensamos", "vosotros": "pensáis", "ellos/ellas/ustedes": "piensan" }
+    present: { "yo": "pienso", "tú": "piensas", "él/ella/usted": "piensa", "nosotros": "pensamos", "vosotros": "pensáis", "ellos/ellas/ustedes": "piensan" },
+    preterite: { "yo": "pensé", "tú": "pensaste", "él/ella/usted": "pensó", "nosotros": "pensamos", "vosotros": "pensasteis", "ellos/ellas/ustedes": "pensaron" },
+    future: { "yo": "pensaré", "tú": "pensarás", "él/ella/usted": "pensará", "nosotros": "pensaremos", "vosotros": "pensaréis", "ellos/ellas/ustedes": "pensarán" }
   },
   {
     id: 45, infinitive: "sentir", translation: "чувствовать / сожалеть",
     transcription: "СЭНТИ́Р", note: "Неправильный глагол (e→ie)",
     example: { greek: "Siento mucho llegar tarde a la cita.", ru: "Мне очень жаль опоздать на встречу." },
-    present: { "yo": "siento", "tú": "sientes", "él/ella/usted": "siente", "nosotros": "sentimos", "vosotros": "sentís", "ellos/ellas/ustedes": "sienten" }
+    present: { "yo": "siento", "tú": "sientes", "él/ella/usted": "siente", "nosotros": "sentimos", "vosotros": "sentís", "ellos/ellas/ustedes": "sienten" },
+    preterite: { "yo": "sentí", "tú": "sentiste", "él/ella/usted": "sintió", "nosotros": "sentimos", "vosotros": "sentisteis", "ellos/ellas/ustedes": "sintieron" },
+    future: { "yo": "sentiré", "tú": "sentirás", "él/ella/usted": "sentirá", "nosotros": "sentiremos", "vosotros": "sentiréis", "ellos/ellas/ustedes": "sentirán" }
   }
 ];
 

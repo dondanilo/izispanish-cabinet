@@ -360,6 +360,10 @@ body {
 .conj-row { display: flex; align-items: center; gap: 8px; }
 .conj-pronoun { color: var(--text-light); font-weight: 600; font-size: 13px; min-width: 52px; }
 .conj-form { font-weight: 800; font-size: 15px; color: var(--green-dark); }
+.conj-tense-label { grid-column: 1 / -1; margin-top: 8px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .04em; color: var(--text-light); border-top: 1px solid var(--border, #eee); padding-top: 8px; }
+.conj-tense-label:first-child { margin-top: 0; border-top: none; padding-top: 0; }
+.teach-conj-tense { margin: 10px 0 4px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .04em; color: var(--text-light); }
+.teach-conj-tense:first-of-type { margin-top: 4px; }
 
 /* ============================================================ 30-DAY PLAN */
 .week-block { margin-bottom: 16px; }

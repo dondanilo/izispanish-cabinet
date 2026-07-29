@@ -1393,11 +1393,18 @@ function renderVerbCards(verbs) {
         <span class="example-ru">${verb.example.ru}</span>
       </div>
       <div class="verb-conjugation">
-        ${PRONOUNS.map((p, i) => `
-          <div class="conj-row">
-            <span class="conj-pronoun">${pronounsRu[i]}</span>
-            <span class="conj-form conj-speakable" onclick="speakGreek('${verb.present[p]}', event)" title="Нажми — услышишь">${verb.present[p]}</span>
-          </div>
+        ${[
+          { label: 'Настоящее', forms: verb.present },
+          { label: 'Прошедшее (indefinido)', forms: verb.preterite },
+          { label: 'Будущее (futuro)', forms: verb.future },
+        ].filter(t => t.forms).map(t => `
+          <div class="conj-tense-label">${t.label}</div>
+          ${PRONOUNS.map((p, i) => `
+            <div class="conj-row">
+              <span class="conj-pronoun">${pronounsRu[i]}</span>
+              <span class="conj-form conj-speakable" onclick="speakGreek('${t.forms[p]}', event)" title="Нажми — услышишь">${t.forms[p]}</span>
+            </div>
+          `).join('')}
         `).join('')}
       </div>
     </div>
@@ -3395,11 +3402,18 @@ function renderTeachCard() {
     </div>` : ''}
     <details class="teach-conj-details">
       <summary class="teach-conj-summary">Спряжение ▾</summary>
-      <div class="teach-conj-grid">
-        ${Object.entries(verb.present || {}).map(([pr, form]) =>
-          `<span class="teach-conj-pr">${pr}</span><span class="teach-conj-form" onclick="speakGreek('${form}')">${form}</span>`
-        ).join('')}
-      </div>
+      ${[
+        { label: 'Настоящее', forms: verb.present },
+        { label: 'Прошедшее (indefinido)', forms: verb.preterite },
+        { label: 'Будущее (futuro)', forms: verb.future },
+      ].filter(t => t.forms).map(t => `
+        <div class="teach-conj-tense">${t.label}</div>
+        <div class="teach-conj-grid">
+          ${Object.entries(t.forms).map(([pr, form]) =>
+            `<span class="teach-conj-pr">${pr}</span><span class="teach-conj-form" onclick="speakGreek('${form}')">${form}</span>`
+          ).join('')}
+        </div>
+      `).join('')}
     </details>`;
 
   const btn = document.getElementById('teach-next-btn');
