@@ -225,6 +225,10 @@ async function checkSubscription() {
   // Developer account — always has access
   if (currentUser.email?.toLowerCase() === 'dondanilo1994@gmail.com') return true;
 
+  // В iOS-приложении подписку подтверждает RevenueCat (native-iap.js выставляет
+  // window.__iziNativeSubscription = true). На вебе всегда undefined → пропускаем.
+  if (window.__iziNativeSubscription === true) return true;
+
   // 1. Check users/{uid}.subscription (set by webhook)
   const ACTIVE_STATUSES = ['active', 'trialing', 'on_trial', 'paid'];
 
@@ -251,6 +255,58 @@ async function checkSubscription() {
   } catch (e) { console.error('checkSubscription error:', e); }
 
   return false;
+}
+
+// ==================== УДАЛЕНИЕ АККАУНТА (App Store Guideline 5.1.1(v)) ====================
+// Полное удаление: данные в Firestore + сам аккаунт Firebase Auth + локальный прогресс.
+function deleteAccount() {
+  if (!currentUser) return;
+  const m = document.getElementById('delete-account-modal');
+  if (m) m.style.display = 'flex';
+}
+
+function dismissDeleteAccount() {
+  const m = document.getElementById('delete-account-modal');
+  if (m) m.style.display = 'none';
+}
+
+async function confirmDeleteAccount() {
+  if (!currentUser) return;
+  const btn = document.getElementById('delete-account-confirm');
+  if (btn) { btn.disabled = true; btn.textContent = 'Удаляем…'; }
+  const uid = currentUser.uid;
+  try {
+    // 1. Свои посты в ленте (пока есть валидный токен — иначе правила не пустят)
+    const myPosts = await db.collection('posts').where('uid', '==', uid).get();
+    if (!myPosts.empty) {
+      const batch = db.batch();
+      myPosts.forEach(d => batch.delete(d.ref));
+      await batch.commit();
+    }
+    // 2. Подписка на пуши и документ пользователя
+    await db.collection('push_subscriptions').doc(uid).delete().catch(() => {});
+    await db.collection('users').doc(uid).delete().catch(() => {});
+    // (subscriptions/{email} не трогаем — платёжная запись, правила write:false)
+
+    // 3. Локальный прогресс
+    try { localStorage.removeItem('greek-app-state-v2'); localStorage.removeItem('apnsToken'); } catch (e) {}
+    state = { ...DEFAULT_STATE };
+
+    // 4. Сам аккаунт Firebase Auth (в конце — после удаления токен пропадёт)
+    await currentUser.delete();
+
+    dismissDeleteAccount();
+    // onAuthStateChanged(null) сам уведёт на экран входа
+  } catch (e) {
+    if (btn) { btn.disabled = false; btn.textContent = 'Удалить навсегда'; }
+    if (e.code === 'auth/requires-recent-login') {
+      dismissDeleteAccount();
+      alert('Для безопасности войди заново, а затем повтори удаление аккаунта.');
+      auth.signOut(); // свежий вход даст «recent login», и удаление пройдёт
+    } else {
+      alert('Не удалось удалить аккаунт: ' + (e.message || e.code || e));
+    }
+  }
 }
 
 function finishOnboarding() {
@@ -472,7 +528,7 @@ function showSettings() {
   });
 
   // Push toggle
-  const pushOn = Notification.permission === 'granted';
+  const pushOn = pushPermission() === 'granted';
   document.getElementById('push-toggle').classList.toggle('on', pushOn);
 
   // Stats
@@ -494,12 +550,25 @@ function setDailyGoal(xp) {
   renderHome();
 }
 
+// В WKWebView (iOS-приложении) объекта Notification НЕ существует — прямое обращение
+// кидает ReferenceError и роняет вызвавшую функцию. Именно эта грабля многократно
+// заваливала ревью IziGreek. Возвращаем 'unsupported' вместо броска.
+function pushPermission() {
+  try {
+    return (typeof Notification !== 'undefined' && Notification.permission) || 'unsupported';
+  } catch (e) { return 'unsupported'; }
+}
+
 async function togglePushSetting() {
-  if (Notification.permission === 'denied') {
+  if (pushPermission() === 'unsupported') {
+    alert('Уведомления в приложении подключаются отдельно — скоро включим.');
+    return;
+  }
+  if (pushPermission() === 'denied') {
     alert('Уведомления заблокированы в настройках браузера. Разрешите их вручную.');
     return;
   }
-  if (Notification.permission === 'granted') {
+  if (pushPermission() === 'granted') {
     // Unsubscribe
     const reg = await navigator.serviceWorker.ready;
     const sub = await reg.pushManager.getSubscription();
@@ -508,11 +577,16 @@ async function togglePushSetting() {
     document.getElementById('push-toggle').classList.remove('on');
   } else {
     await setupPushNotifications();
-    document.getElementById('push-toggle').classList.toggle('on', Notification.permission === 'granted');
+    document.getElementById('push-toggle').classList.toggle('on', pushPermission() === 'granted');
   }
 }
 
 function showPaywall() {
+  // В iOS-приложении оплата обязана идти через Apple IAP (гайдлайн 3.1.1), а не
+  // через внешний LemonSqueezy. native-iap.js регистрирует __iziIapPaywall и сам
+  // навешивает нативную покупку на кнопки. На вебе хук undefined → обычный флоу.
+  if (typeof window.__iziIapPaywall === 'function') { window.__iziIapPaywall(); return; }
+
   const monthlyUrl = `https://izispanish.lemonsqueezy.com/checkout/buy/MONTHLY_PRODUCT_ID?checkout[custom][user_id]=${currentUser?.uid || ''}`;
   const annualUrl = `https://izispanish.lemonsqueezy.com/checkout/buy/YEARLY_PRODUCT_ID?checkout[custom][user_id]=${currentUser?.uid || ''}`;
 
@@ -567,7 +641,7 @@ async function init() {
         } else {
           showScreen('screen-home');
           // Silently refresh push subscription for returning users
-          if (Notification.permission === 'granted') {
+          if (pushPermission() === 'granted') {
             setTimeout(setupPushNotifications, 3000);
           }
         }

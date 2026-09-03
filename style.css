@@ -2,6 +2,10 @@
   --green: #AA151B;
   --green-dark: #7A0F13;
   --green-light: #FFE8E8;
+  /* Акцентный цвет действий/прогресса. Шаблон грека использует var(--primary) в 10 местах,
+     но в :root её не было → прозрачный фон (кнопка покупки «невидима»). Грабля валила ревью
+     грека и серба. Задаём = бренд-красный. */
+  --primary: #AA151B;
   --correct: #58CC02;
   --correct-dark: #46a302;
   --correct-light: #D7FFB8;
@@ -2681,3 +2685,27 @@ body {
   background: #fff9e6; border-radius: 12px;
   padding: 12px 14px; font-size: 13px; color: #555; line-height: 1.6;
 }
+
+/* ==================== iOS: вход через Apple + удаление аккаунта ==================== */
+.btn-apple-login {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  width: 100%; margin-top: 12px; padding: 15px 28px;
+  background: #000; color: #fff;
+  border: none; border-radius: 14px;
+  font-family: 'Nunito', sans-serif; font-size: 16px; font-weight: 700;
+  cursor: pointer; box-shadow: 0 3px 0 #333;
+  transition: transform 0.08s, box-shadow 0.08s;
+}
+.btn-apple-login:active { transform: translateY(3px); box-shadow: none; }
+.btn-apple-login:disabled { opacity: .6; cursor: default; }
+.apple-svg { flex-shrink: 0; margin-top: -2px; }
+
+/* Кнопка «Удалить аккаунт» (App Store 5.1.1(v)) */
+.btn-delete-account {
+  width: 100%; padding: 14px; margin-top: 10px;
+  background: var(--red); color: #fff;
+  border: none; border-radius: 14px;
+  font-family: 'Nunito', sans-serif; font-size: 15px; font-weight: 800;
+  cursor: pointer;
+}
+.btn-delete-account:disabled { opacity: .6; cursor: default; }
