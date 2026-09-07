@@ -3567,7 +3567,44 @@ function onSpeechMicClick() {
   startSpeechRecognition();
 }
 
+// Нативное распознавание (в приложении) — вместо Web Speech API, которого нет в WKWebView.
+function runNativeSpeech() {
+  const ns = window.__iziNativeSpeech;
+  const recognize = () => {
+    setSpeechUIState('recording');
+    ns.recognize('es-ES').then(alts => {
+      const target = speechSession.words[speechSession.index].greek;
+      const el = document.getElementById('speech-recognized');
+      if (el) el.textContent = (alts && alts[0]) || '';
+      const ok = (alts || []).some(t => normalizeGreekSpeech(t) === normalizeGreekSpeech(target));
+      if (ok) {
+        speechSession.correctCount++;
+        speechSession.xpEarned += 5;
+        setSpeechUIState('correct');
+      } else {
+        setSpeechUIState('wrong');
+      }
+    }).catch(() => {
+      setSpeechUIState('idle');
+      const el = document.getElementById('speech-recognized');
+      if (el) el.textContent = '🎙️ Не удалось распознать. Попробуй ещё раз.';
+    });
+  };
+  if (speechSession.micGranted) { recognize(); return; }
+  ns.requestPermission().then(granted => {
+    if (granted) { speechSession.micGranted = true; recognize(); }
+    else {
+      setSpeechUIState('idle');
+      const el = document.getElementById('speech-recognized');
+      if (el) el.textContent = '🎙️ Разреши доступ к микрофону и распознаванию речи в Настройках.';
+    }
+  });
+}
+
 function startSpeechRecognition() {
+  // В приложении идём нативным путём (SFSpeechRecognizer) — Web Speech API в WKWebView нет.
+  if (window.__iziNativeSpeech) { runNativeSpeech(); return; }
+
   const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
   if (!SR) {
     alert('Ваш браузер не поддерживает распознавание речи. Используйте Chrome или Safari.');
