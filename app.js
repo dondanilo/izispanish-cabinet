@@ -688,8 +688,9 @@ async function init() {
         showScreen('screen-onboarding');
       } else {
         showScreen('screen-home');
-        // Silently refresh push subscription for returning users
-        if (pushPermission() === 'granted') {
+        // Silently refresh push for returning users (web: если уже granted;
+        // iOS: всегда — регистрация в APNs идемпотентна, токен обновится).
+        if (isNativeApp() || pushPermission() === 'granted') {
           setTimeout(setupPushNotifications, 3000);
         }
       }
