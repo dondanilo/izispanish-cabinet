@@ -599,6 +599,12 @@ function showPaywall() {
 // INIT
 // ============================================================
 async function init() {
+  // Мост из блога (iframe izispanish.com?ref=cabinet): тап по CTA внутри приложения
+  // открывает нативный пейволл Apple (гайдлайн 3.1.1), а не внешний чекаут.
+  window.addEventListener('message', (e) => {
+    if (e && e.data && e.data.type === 'izi-open-paywall') showPaywall();
+  });
+
   if ('serviceWorker' in navigator) {
     const reg = await navigator.serviceWorker.register('sw.js').catch(() => null);
 
@@ -633,24 +639,39 @@ async function init() {
       checkStreak();
       renderUserInfo();
 
-      const hasAccess = await checkSubscription();
-      if (hasAccess) {
-        renderHome();
-        if (!state.onboardingDone) {
-          showScreen('screen-onboarding');
-        } else {
-          showScreen('screen-home');
-          // Silently refresh push subscription for returning users
-          if (pushPermission() === 'granted') {
-            setTimeout(setupPushNotifications, 3000);
-          }
-        }
+      hasSubscription = await checkSubscription();
+      updateGuestUi();
+
+      // Гость нажал «оформить» до входа → после входа сразу ведём на пейволл.
+      if (pendingUpgrade) {
+        pendingUpgrade = false;
+        if (!hasSubscription) { showPaywall(); return; }
+      }
+
+      // Вошедший без подписки НЕ упирается в пейволл сразу — остаются пробные
+      // уроки (trialGate), пейволл всплывает по исчерпании. Так и ревьюер, и
+      // пользователь видят контент, а не глухую стену.
+      renderHome();
+      if (!state.onboardingDone) {
+        showScreen('screen-onboarding');
       } else {
-        showPaywall();
+        showScreen('screen-home');
+        // Silently refresh push subscription for returning users
+        if (pushPermission() === 'granted') {
+          setTimeout(setupPushNotifications, 3000);
+        }
       }
     } else {
+      // Гость: работаем на локальном прогрессе, вход не форсим.
       currentUser = null;
-      showScreen('screen-login');
+      hasSubscription = false;
+      pendingUpgrade = false;
+      await loadState();
+      checkStreak();
+      updateGuestUi();
+      renderHome();
+      if (!state.onboardingDone) showScreen('screen-onboarding');
+      else showScreen('screen-home');
     }
   });
 }
@@ -791,12 +812,14 @@ function shuffle(arr) { return [...arr].sort(() => Math.random() - 0.5); }
 // LESSON — FLOW
 // ============================================================
 function startLesson() {
+  if (!trialGate()) return;
   const mods = getLessonModules();
   const num = Math.min(state.currentLesson || 1, mods.length);
   startTeachPhase(mods[num - 1]);
 }
 
 function startWeakLesson() {
+  if (!trialGate()) return;
   const weakIds = Object.keys(state.errorLog)
     .sort((a, b) => state.errorLog[b] - state.errorLog[a])
     .map(id => parseInt(id));
@@ -1152,6 +1175,7 @@ function buildSrsPool() {
 }
 
 function startSrsLesson() {
+  if (!trialGate()) return;
   const dueVerbs = getSrsDueVerbs();
   if (dueVerbs.length === 0) return;
   const pool = dueVerbs.length >= 2 ? dueVerbs : null;
@@ -1304,10 +1328,74 @@ function pluralRu(n, forms) {
   if (r >= 2 && r <= 4) return forms[1];
   return forms[2];
 }
-// В IziSpanish доступ гейтится целиком на входе (checkSubscription → showPaywall):
-// до карточек доходит только пользователь с активным доступом. Заглушка на будущее,
-// если появится модель «N бесплатных занятий» (как trialGate у грека).
-function trialGate() { return true; }
+// ============================================================
+// ГОСТЕВОЙ РЕЖИМ + ПРОБНЫЕ УРОКИ (как в IziGreek/IziSerb)
+// Гостю доступно TRIAL_LESSONS бесплатных занятий без входа/подписки; дальше —
+// модалка с предложением открыть полный доступ (вход → нативный пейволл Apple).
+// ============================================================
+const TRIAL_LESSONS = 5;      // сколько занятий доступно бесплатно
+let hasSubscription = false;
+let pendingUpgrade = false;   // гость нажал «оформить» → после входа сразу пейволл
+
+function trialGate() {
+  if (hasSubscription) return true;
+  if ((state.lessonsCompleted || 0) < TRIAL_LESSONS) return true;
+  showTrialModal();
+  return false;
+}
+
+function showTrialModal() {
+  const cta = document.getElementById('trial-cta');
+  if (cta) cta.textContent = currentUser ? 'Открыть полный доступ' : 'Войти и открыть доступ';
+  const m = document.getElementById('trial-modal');
+  if (m) m.style.display = 'flex';
+}
+
+function dismissTrialModal() {
+  const m = document.getElementById('trial-modal');
+  if (m) m.style.display = 'none';
+}
+
+function trialUpgrade() {
+  dismissTrialModal();
+  if (currentUser) {
+    showPaywall();          // вошёл — сразу планы (на iOS — нативный Apple IAP)
+  } else {
+    pendingUpgrade = true;  // гость — сперва вход, после него откроем пейволл
+    showLoginPromo();
+  }
+}
+
+// Кнопка возврата на главную — только гостю с уже пройденным онбордингом
+// (на самом первом запуске уходить с экрана входа некуда).
+function updateLoginBackBtn() {
+  const back = document.getElementById('login-back-btn');
+  if (back) back.style.display = state.onboardingDone ? 'block' : 'none';
+}
+
+function showLoginPromo() {
+  const sub = document.querySelector('#screen-login .login-subtitle');
+  if (sub) sub.textContent = 'Бесплатные уроки пройдены. Войди, чтобы продолжить и сохранить прогресс.';
+  updateLoginBackBtn();
+  showScreen('screen-login');
+}
+
+// Обычный вход по кнопке «Войти» на главной.
+function showLogin() {
+  const sub = document.querySelector('#screen-login .login-subtitle');
+  if (sub) sub.textContent = 'Войди — прогресс сохранится на всех устройствах';
+  updateLoginBackBtn();
+  showScreen('screen-login');
+}
+
+// Гостю показываем кнопку «Войти» вместо аватара.
+function updateGuestUi() {
+  const isGuest = !currentUser;
+  const loginBtn = document.getElementById('guest-login-btn');
+  const avatarBtn = document.getElementById('user-avatar-btn');
+  if (loginBtn) loginBtn.style.display = isGuest ? 'inline-flex' : 'none';
+  if (avatarBtn) avatarBtn.style.display = isGuest ? 'none' : 'inline-flex';
+}
 
 const FC_BATCH = 10; // пауза «продолжим/хватит» каждые 10 слов
 let fcState = {
@@ -1581,6 +1669,7 @@ function showScenarios() {
 }
 
 function startScenario(id) {
+  if (!trialGate()) return;
   const scenario = SCENARIOS.find(s => s.id === id);
   if (!scenario) return;
   scenarioState = { scenarioId: id, currentStep: 0, score: 0, answered: false };
@@ -3037,6 +3126,7 @@ function showQuiz() {
 }
 
 function startQuiz(categoryId) {
+  if (!trialGate()) return;
   const cat = QUIZ_CATEGORIES.find(c => c.id === categoryId);
   if (!cat) return;
   // Берём 10 предложений: сортируем по сложности, выбираем равномерно
@@ -3485,6 +3575,7 @@ function showSpeechTraining() {
 }
 
 function startSpeechSession(catId) {
+  if (!trialGate()) return;
   const cat = SPEECH_CATEGORIES.find(c => c.id === catId);
   if (!cat) return;
   const all = cat.getWords().filter(w => w.greek && w.translation);

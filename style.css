@@ -2812,3 +2812,22 @@ body {
 .fc-break-continue { justify-content: center; background: var(--green) !important; border-color: var(--green) !important; }
 .fc-break-continue .fc-dir-flag, .fc-break-continue .fc-dir-note { color: #fff; }
 .fc-break-continue { flex-direction: column; align-items: center; gap: 2px; }
+
+/* ==================== ГОСТЕВОЙ РЕЖИМ ==================== */
+/* Кнопка «Войти» в шапке (гостю вместо аватара) */
+.btn-guest-login {
+  display: inline-flex; align-items: center; justify-content: center;
+  height: 40px; padding: 0 18px; border-radius: 20px; border: none;
+  background: var(--primary); color: #fff; cursor: pointer;
+  font-family: 'Nunito', sans-serif; font-size: 15px; font-weight: 800; flex-shrink: 0;
+}
+.btn-guest-login:active { transform: scale(0.97); }
+
+/* Кнопка «Не сейчас» на экране входа (возврат гостя на главную) */
+.btn-login-back {
+  margin-top: 18px; padding: 10px 20px;
+  background: none; border: none; color: var(--text-light);
+  font-family: 'Nunito', sans-serif; font-size: 15px; font-weight: 700;
+  cursor: pointer; text-decoration: underline;
+}
+.btn-login-back:active { opacity: .6; }
