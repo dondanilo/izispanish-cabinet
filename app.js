@@ -285,6 +285,7 @@ async function confirmDeleteAccount() {
     }
     // 2. Подписка на пуши и документ пользователя
     await db.collection('push_subscriptions').doc(uid).delete().catch(() => {});
+    await db.collection('apns_subscriptions').doc(uid).delete().catch(() => {});
     await db.collection('users').doc(uid).delete().catch(() => {});
     // (subscriptions/{email} не трогаем — платёжная запись, правила write:false)
 
@@ -326,7 +327,35 @@ function urlBase64ToUint8Array(base64) {
   return Uint8Array.from([...raw].map(c => c.charCodeAt(0)));
 }
 
+// В iOS-приложении Web Push недоступен (WKWebView) — пуши идут через APNs.
+// native-bridge.js получает device-token и шлёт событие 'apnsToken'; здесь
+// сохраняем его в Firestore-коллекцию apns_subscriptions/{uid}, откуда крон
+// izispanish-webhook рассылает по APNs.
+async function saveApnsToken(token) {
+  if (!token || !currentUser) return;
+  try {
+    await db.collection('apns_subscriptions').doc(currentUser.uid).set({
+      token,
+      uid: currentUser.uid,
+      platform: 'ios',
+      updatedAt: new Date().toISOString()
+    });
+  } catch (e) { console.error('saveApnsToken error:', e); }
+}
+
+function isNativeApp() {
+  return !!(window.Capacitor && typeof window.Capacitor.isNativePlatform === 'function'
+            && window.Capacitor.isNativePlatform());
+}
+
 async function setupPushNotifications() {
+  // iOS-приложение: запрашиваем разрешение и регистрируемся на APNs, а не Web Push.
+  if (isNativeApp()) {
+    if (typeof window.__nativeRegisterPush === 'function') window.__nativeRegisterPush();
+    // токен уже мог прийти до входа — досохраним
+    if (window.__APNS_TOKEN) saveApnsToken(window.__APNS_TOKEN);
+    return;
+  }
   if (!('Notification' in window) || !('PushManager' in window)) return;
   if (Notification.permission === 'denied') return;
   try {
@@ -604,6 +633,9 @@ async function init() {
   window.addEventListener('message', (e) => {
     if (e && e.data && e.data.type === 'izi-open-paywall') showPaywall();
   });
+
+  // APNs device-token из native-bridge.js (iOS) → сохраняем под текущим юзером.
+  window.addEventListener('apnsToken', (e) => { saveApnsToken(e.detail); });
 
   if ('serviceWorker' in navigator) {
     const reg = await navigator.serviceWorker.register('sw.js').catch(() => null);
