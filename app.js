@@ -1067,6 +1067,8 @@ function completeLesson() {
   state.totalXp += lessonState.xpEarned;
   state.level = Math.floor(state.totalXp / 500) + 1;
   state.lessonsCompleted++;
+  // Запрос нативной оценки в App Store (native-rating.js решает по числу уроков; на вебе no-op).
+  if (typeof window.__iziMaybeReview === 'function') window.__iziMaybeReview(state.lessonsCompleted);
   const isPerfect = lessonState.hearts === 3 && lessonState.correct === EXERCISES_PER_LESSON;
   if (lessonState.isWeakMode) {
     // Clear errors for verbs that were practiced
