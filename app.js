@@ -1371,7 +1371,9 @@ let hasSubscription = false;
 let pendingUpgrade = false;   // гость нажал «оформить» → после входа сразу пейволл
 
 function trialGate() {
-  if (hasSubscription) return true;
+  // __iziNativeSubscription — подписка Apple: гость без аккаунта тоже может её иметь,
+  // а onAuthStateChanged гостю сбрасывает hasSubscription в false.
+  if (hasSubscription || window.__iziNativeSubscription === true) return true;
   if ((state.lessonsCompleted || 0) < TRIAL_LESSONS) return true;
   showTrialModal();
   return false;
@@ -1379,7 +1381,8 @@ function trialGate() {
 
 function showTrialModal() {
   const cta = document.getElementById('trial-cta');
-  if (cta) cta.textContent = currentUser ? 'Открыть полный доступ' : 'Войти и открыть доступ';
+  // На нативе логин для покупки не нужен → план и гостю.
+  if (cta) cta.textContent = (currentUser || isNativeApp()) ? 'Открыть полный доступ' : 'Войти и открыть доступ';
   const m = document.getElementById('trial-modal');
   if (m) m.style.display = 'flex';
 }
@@ -1391,12 +1394,21 @@ function dismissTrialModal() {
 
 function trialUpgrade() {
   dismissTrialModal();
-  if (currentUser) {
-    showPaywall();          // вошёл — сразу планы (на iOS — нативный Apple IAP)
+  if (currentUser || isNativeApp()) {
+    // Вошёл ИЛИ натив-гость → сразу планы. На нативе RevenueCat оформит Apple-триал
+    // без Firebase-логина (на другом устройстве — «Восстановить покупки» по Apple ID).
+    showPaywall();
   } else {
-    pendingUpgrade = true;  // гость — сперва вход, после него откроем пейволл
+    pendingUpgrade = true;  // веб-гость — сперва вход (LemonSqueezy матчит по email)
     showLoginPromo();
   }
+}
+
+// Уйти с пейволла, ничего не купив («Не сейчас»). Натив-гость попадает на пейволл
+// без входа — ему нужен выход, а не «Выйти из аккаунта».
+function closePaywall() {
+  if (typeof showHome === 'function') showHome();
+  else showScreen('screen-home');
 }
 
 // Кнопка возврата на главную — только гостю с уже пройденным онбордингом
@@ -1428,6 +1440,9 @@ function updateGuestUi() {
   const avatarBtn = document.getElementById('user-avatar-btn');
   if (loginBtn) loginBtn.style.display = isGuest ? 'inline-flex' : 'none';
   if (avatarBtn) avatarBtn.style.display = isGuest ? 'none' : 'inline-flex';
+  // «Выйти из аккаунта» на пейволле бессмысленна для гостя (аккаунта нет) — прячем.
+  const pwSignout = document.getElementById('paywall-signout-btn');
+  if (pwSignout) pwSignout.style.display = isGuest ? 'none' : '';
 }
 
 const FC_BATCH = 10; // пауза «продолжим/хватит» каждые 10 слов

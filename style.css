@@ -1372,6 +1372,12 @@ body {
   background: none; border: none; color: var(--gray); font-size: 14px;
   cursor: pointer; text-decoration: underline; padding: 8px;
 }
+.paywall-skip {
+  display: block; width: 100%; background: none; border: none;
+  color: var(--gray); font-size: 15px; cursor: pointer; padding: 12px;
+  margin-top: 4px;
+}
+.paywall-skip:active { opacity: .6; }
 
 /* ==================== SCROLL TO TOP ==================== */
 #scroll-top-btn {

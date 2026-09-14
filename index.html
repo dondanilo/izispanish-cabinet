@@ -120,7 +120,9 @@
       </div>
 
       <p class="paywall-note">7 дней бесплатно · Отмена в любой момент</p>
-      <button class="paywall-signout" onclick="signOut()">Выйти из аккаунта</button>
+      <!-- Натив-гость попадает на пейволл без входа — ему нужен выход; signout updateGuestUi прячет гостю. -->
+      <button class="paywall-skip" onclick="closePaywall()">Не сейчас</button>
+      <button id="paywall-signout-btn" class="paywall-signout" onclick="signOut()">Выйти из аккаунта</button>
     </div>
   </div>
 
