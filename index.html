@@ -764,6 +764,14 @@
       </div>
     </div>
 
+    <!-- Подписка / Premium — прямой вход в пейволл.
+         Важно для ревью Apple (2.1(b)): здесь ревьюер находит In-App Purchases в 1 тап.
+         На нативе (isNativeApp) пейволл открывается БЕЗ логина (стандарт семьи, коммит 4177cfd). -->
+    <div class="settings-section">
+      <div class="settings-section-title">Подписка</div>
+      <button class="btn-primary" onclick="showPaywall()" style="width:100%">⭐ Открыть Premium-доступ</button>
+    </div>
+
     <!-- Daily goal -->
     <div class="settings-section">
       <div class="settings-section-title">Ежедневная цель</div>
