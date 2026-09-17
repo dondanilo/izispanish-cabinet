@@ -120,6 +120,16 @@
       </div>
 
       <p class="paywall-note">7 дней бесплатно · Отмена в любой момент</p>
+
+      <!-- Обязательно для App Store (Guideline 3.1.2(c)): рабочие ссылки на
+           условия использования (EULA) и политику конфиденциальности прямо в пейволле —
+           за их отсутствие Apple отклоняет билд. target="_blank" в приложении Capacitor
+           открывает Safari, на вебе ссылка работает штатно. -->
+      <p class="paywall-legal">
+        <a href="https://izispanish.com/terms.html" target="_blank" rel="noopener">Условия использования</a>
+        <span class="paywall-legal-sep">·</span>
+        <a href="https://izispanish.com/privacy.html" target="_blank" rel="noopener">Политика конфиденциальности</a>
+      </p>
       <!-- Натив-гость попадает на пейволл без входа — ему нужен выход; signout updateGuestUi прячет гостю. -->
       <button class="paywall-skip" onclick="closePaywall()">Не сейчас</button>
       <button id="paywall-signout-btn" class="paywall-signout" onclick="signOut()">Выйти из аккаунта</button>

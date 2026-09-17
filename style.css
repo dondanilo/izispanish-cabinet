@@ -2837,3 +2837,12 @@ body {
   cursor: pointer; text-decoration: underline;
 }
 .btn-login-back:active { opacity: .6; }
+
+/* Ссылки Terms/Privacy в пейволле (App Store Guideline 3.1.2(c)) */
+.paywall-legal {
+  font-size: 13px; line-height: 1.6; margin-bottom: 24px;
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 6px;
+}
+.paywall-legal a { color: var(--gray); text-decoration: underline; }
+.paywall-legal a:active { opacity: .6; }
+.paywall-legal-sep { color: var(--gray); }
